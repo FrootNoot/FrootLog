@@ -7,10 +7,11 @@ function App() {
   const [todos, setTodos] = useState([]);
   
   // Add a new todo
-  const addTodo = (text) => {
+  const addTodo = (text, text2) => {
     const newTodo = {
       id: Date.now(),
       text,
+      text2,
       completed: false,
     };
     setTodos([...todos, newTodo]);
