@@ -8,11 +8,13 @@ function TodoForm({ addTodo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (input.trim()) {
+    if (input.trim() && input2.trim()) {
       addTodo(input, input2);
       setInput('');
       setInput2('');
-
+    } 
+    else {
+      alert("Fill in both fields broski")
     }
   };
 

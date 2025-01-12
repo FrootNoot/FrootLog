@@ -40,6 +40,31 @@ app.get('/todo', async (req, res) => {
   }
 });
 
+app.put('/todo/completed/:id', async (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body;
+
+  try {
+    const updatedTodo = await db.query(
+      `UPDATE "toDoItems"
+       SET completed = $1
+       WHERE id = $2
+       RETURNING *`,
+      [completed, id]
+    );
+
+    if (updatedTodo.rows.length === 0) {
+      return res.status(404).json({ error: 'Todo not found' });
+    }
+
+    res.json(updatedTodo.rows[0]);
+  } catch (error) {
+    console.error('Error updating todo:', error);
+    res.status(500).json({ error: 'Database error' });
+  }
+});
+
+
 app.put('/todo/:id', async (req, res) => {
   const { id } = req.params;
   const { text, text2, completed } = req.body;

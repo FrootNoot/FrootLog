@@ -18,9 +18,9 @@ function App() {
     }
   };
 
-  const addTodo = async (text1, text2) => {
+  const addTodo = async (text, text2) => {
     try {
-      const newTodo = { text1, text2, completed: false };
+      const newTodo = { text, text2, completed: false };
       const response = await axios.post('http://localhost:5000/todo', newTodo); 
       setTodos([...todos, response.data]);
     } catch (error) {
@@ -32,14 +32,20 @@ function App() {
     try {
       const todoToUpdate = todos.find((todo) => todo.id === id);
       if (!todoToUpdate) return;
-
-      const updatedTodo = { ...todoToUpdate, completed: !todoToUpdate.completed };
-      await axios.put(`http://localhost:5000/todo/${id}`, updatedTodo); 
+  
+      const updatedTodo = {
+        ...todoToUpdate, 
+        completed: !todoToUpdate.completed, 
+      };
+  
+      await axios.put(`http://localhost:5000/todo/completed/${id}`, updatedTodo);
+  
       setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
     } catch (error) {
       console.error('Error toggling todo completion:', error);
     }
   };
+  
 
   const deleteTodo = async (id) => {
     try {
