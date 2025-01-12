@@ -1,33 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import styles from './App.module.css';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  
-  // Add a new todo
-  const addTodo = (text, text2) => {
-    const newTodo = {
-      id: Date.now(),
-      text,
-      text2,
-      completed: false,
-    };
-    setTodos([...todos, newTodo]);
+
+  const fetchTodos = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/todo'); 
+      console.log("here")
+      console.log(response.data)
+      setTodos(response.data);
+    } catch (error) {
+      console.error('Error fetching todos:', error);
+    }
   };
 
-  // Toggle completion status
-  const toggleComplete = (id) => {
-    setTodos(todos.map(todo => 
-      todo.id === id ? { ...todo, completed: !todo.completed } : todo
-    ));
+  const addTodo = async (text1, text2) => {
+    try {
+      const newTodo = { text1, text2, completed: false };
+      const response = await axios.post('http://localhost:5000/todo', newTodo); 
+      setTodos([...todos, response.data]);
+    } catch (error) {
+      console.error('Error adding todo:', error);
+    }
   };
 
-  // Delete a todo
-  const deleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
+  const toggleComplete = async (id) => {
+    try {
+      const todoToUpdate = todos.find((todo) => todo.id === id);
+      if (!todoToUpdate) return;
+
+      const updatedTodo = { ...todoToUpdate, completed: !todoToUpdate.completed };
+      await axios.put(`http://localhost:5000/todo/${id}`, updatedTodo); 
+      setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
+    } catch (error) {
+      console.error('Error toggling todo completion:', error);
+    }
   };
+
+  const deleteTodo = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/todo/${id}`); 
+      setTodos(todos.filter((todo) => todo.id !== id));
+    } catch (error) {
+      console.error('Error deleting todo:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
 
   return (
     <div className={styles.app}>

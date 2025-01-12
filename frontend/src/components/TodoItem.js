@@ -5,7 +5,7 @@ function TodoItem({ todo, toggleComplete, deleteTodo }) {
   return (
     <li className={`${styles.item} ${todo.completed ? styles.completed : ''}`}>
       <span className={styles.text} onClick={() => toggleComplete(todo.id)}>
-        {todo.text}
+        {todo.text1}
       </span>
       <span className={styles.text} onClick={() => toggleComplete(todo.id)}>
         {todo.text2}
