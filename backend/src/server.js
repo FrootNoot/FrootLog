@@ -107,6 +107,20 @@ app.delete('/todo/:id', async (req, res) => {
   }
 });
 
+app.get('/exercises', async (req, res) => {
+  const { query } = req.query; 
+  try {
+      const result = await db.query(
+          'SELECT name FROM exercises WHERE name ILIKE $1 LIMIT 10',
+          [`%${query}%`]
+      );
+      res.json(result.rows.map(row => row.name));
+  } catch (error) {
+      console.error('Error fetching exercises:', error);
+      res.status(500).json({ error: 'Failed to fetch exercises' });
+  }
+});
+
 app.post('/workouts', async (req, res) => {
   const { workoutName, date, exercises } = req.body;
 

@@ -5,6 +5,7 @@ const WorkoutForm = () => {
     const [workoutName, setWorkoutName] = useState('');
     const [date, setDate] = useState('');
     const [exercises, setExercises] = useState([{ name: '', weight: '', sets: '', reps: [] }]);
+    const [suggestions, setSuggestions] = useState([]);
 
     const handleAddExercise = () => {
         setExercises([...exercises, { name: '', weight: '', sets: '', reps: [] }]);
@@ -15,10 +16,28 @@ const WorkoutForm = () => {
         setExercises(newExercises);
     };
 
-    const handleChangeExercise = (index, field, value) => {
+    const handleChangeExercise = async (index, field, value) => {
         const newExercises = [...exercises];
         newExercises[index][field] = value;
         setExercises(newExercises);
+
+        if (field === 'name' && value.trim()) {
+            try {
+                const response = await axios.get('http://localhost:5000/exercises', {
+                    params: { query: value },
+                });
+                setSuggestions(response.data);
+            } catch (error) {
+                console.error('Error fetching suggestions:', error);
+            }
+        }
+    };
+
+    const handleSelectSuggestion = (index, suggestion) => {
+        const newExercises = [...exercises];
+        newExercises[index].name = suggestion;
+        setExercises(newExercises);
+        setSuggestions([]);
     };
 
     const handleSubmit = async (e) => {
@@ -28,6 +47,9 @@ const WorkoutForm = () => {
         try {
             await axios.post('http://localhost:5000/workouts', workoutData);
             alert('Workout added successfully');
+            setWorkoutName('');
+            setDate('');
+            setExercises([{ name: '', weight: '', sets: '', reps: [] }]);
         } catch (error) {
             console.error('Error adding workout:', error);
             alert('Error adding workout');
@@ -48,13 +70,24 @@ const WorkoutForm = () => {
             <div>
                 <h3>Exercises</h3>
                 {exercises.map((exercise, index) => (
-                    <div key={index}>
+                    <div key={index} style={{ position: 'relative' }}>
                         <input
                             type="text"
                             placeholder="Exercise Name"
                             value={exercise.name}
                             onChange={(e) => handleChangeExercise(index, 'name', e.target.value)}
+                            onBlur={() => setTimeout(() => setSuggestions([]), 100)} 
+                            onFocus={(e) => handleChangeExercise(index, 'name', e.target.value)}
                         />
+                        {suggestions.length > 0 && (
+                            <ul style={{ position: 'absolute', top: '100%', left: 0, background: 'white', border: '1px solid #ccc', listStyleType: 'none', padding: '5px', margin: 0 }}>
+                                {suggestions.map((suggestion, i) => (
+                                    <li key={i} onClick={() => handleSelectSuggestion(index, suggestion)} style={{ cursor: 'pointer', padding: '5px' }}>
+                                        {suggestion}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                         <input
                             type="number"
                             placeholder="Weight"
