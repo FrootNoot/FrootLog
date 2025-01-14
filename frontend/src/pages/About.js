@@ -1,11 +1,12 @@
 import {Link} from 'react-router-dom'
 import styles from './About.module.css';
+import WorkoutForm from '../components/WorkoutForm';
 
 
 function About() {
   return (
     <div>
-        <h1 className={styles.title}> this is the about page</h1>
+        <WorkoutForm />
         <Link className={styles.link} to="/"> <button> Back to home </button> </Link>
     </div>
   );

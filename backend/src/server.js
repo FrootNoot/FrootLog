@@ -107,6 +107,46 @@ app.delete('/todo/:id', async (req, res) => {
   }
 });
 
+app.post('/workouts', async (req, res) => {
+  const { workoutName, date, exercises } = req.body;
+
+  try {
+      const result = await db.query(
+          'INSERT INTO workouts (workout_name, date) VALUES ($1, $2) RETURNING id',
+          [workoutName, date]
+      );
+      const workoutId = result.rows[0].id;
+
+      for (const exercise of exercises) {
+          let exerciseResult = await db.query(
+              'SELECT id FROM exercises WHERE name = $1',
+              [exercise.name]
+          );
+
+          if (exerciseResult.rows.length === 0) {
+              const newExerciseResult = await db.query(
+                  'INSERT INTO exercises (name) VALUES ($1) RETURNING id',
+                  [exercise.name]
+              );
+              exerciseResult = { rows: [{ id: newExerciseResult.rows[0].id }] };
+          }
+
+          const exerciseId = exerciseResult.rows[0].id;
+
+          await db.query(
+              'INSERT INTO workout_exercises (workout_id, exercise_id, weight, sets, reps) VALUES ($1, $2, $3, $4, $5)',
+              [workoutId, exerciseId, exercise.weight, exercise.sets, exercise.reps]
+          );
+      }
+
+      res.status(201).json({ message: 'Workout and exercises added successfully' });
+  } catch (error) {
+      console.error('Error saving workout:', error);
+      res.status(500).json({ error: 'Failed to save workout' });
+  }
+});
+
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
