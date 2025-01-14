@@ -3,6 +3,8 @@ import axios from 'axios';
 import TodoList from './components/TodoList';
 import TodoForm from './components/TodoForm';
 import styles from './App.module.css';
+import {Link} from 'react-router-dom'
+
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -65,6 +67,8 @@ function App() {
       <h1 className={styles.header}>To-Do List</h1>
       <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} />
+      <Link to="/about"> to about </Link>
+
     </div>
   );
 }
