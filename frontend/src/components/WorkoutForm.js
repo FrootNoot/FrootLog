@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import styles from './WorkoutForm.module.css';
 
 const WorkoutForm = () => {
     const [workoutName, setWorkoutName] = useState('');
@@ -59,7 +60,7 @@ const WorkoutForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label>Workout Name:</label>
+                <label className={styles.title}>Workout Name:</label>
                 <input type="text" value={workoutName} onChange={(e) => setWorkoutName(e.target.value)} />
             </div>
             <div>
