@@ -13,6 +13,17 @@ const db = new Pool({
 
 app.use(express.json());
 
+app.get('/workouts', async (req, res) => {
+  try {
+    const result = await db.query('SELECT * FROM "workouts" ORDER BY id ASC;');
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error fetching workouts:', err.stack);
+    res.status(500).json({ error: 'Failed to fetch workouts' });
+  }
+});
+
+
 app.post('/todo', async (req, res) => {
   const { text, text2, completed = false } = req.body;
 

@@ -68,6 +68,8 @@ function App() {
       <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} />
       <Link to="/about"> to about </Link>
+      <Link to="/dashboard"> to dashboard </Link>
+
 
     </div>
   );
