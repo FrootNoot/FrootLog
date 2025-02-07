@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import styles from './Dashboard.module.css';
-import WorkoutList from '../components/WorkoutList';
+import WorkoutList from '../components/WorkoutList/WorkoutList';
 
 function dashboard() {
   return (

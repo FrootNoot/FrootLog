@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import TodoList from './components/TodoList';
-import TodoForm from './components/TodoForm';
+import TodoList from './components/Todo/TodoList';
+import TodoForm from './components/Todo/TodoForm';
 import styles from './App.module.css';
 import {Link} from 'react-router-dom'
 

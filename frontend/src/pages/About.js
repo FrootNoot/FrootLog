@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom'
 import styles from './About.module.css';
-import WorkoutForm from '../components/WorkoutForm';
+import WorkoutForm from '../components/WorkoutList/WorkoutForm';
 
 
 function About() {
