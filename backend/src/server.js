@@ -13,6 +13,27 @@ const db = new Pool({
 
 app.use(express.json());
 
+
+app.get('/exercises', async (req, res) => {
+  const { workout_id } = req.query;
+
+  try {
+
+    const result = await db.query(
+        `SELECT e.id, e.name, we.weight, we.sets, we.reps 
+         FROM workout_exercises we
+         JOIN exercises e ON we.exercise_id = e.id
+         WHERE we.workout_id = $1`,
+        [workout_id]
+    );
+
+    res.json(result.rows);
+} catch (error) {
+    console.error('Error fetching exercises:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+});
+
 app.get('/workouts', async (req, res) => {
   try {
     const result = await db.query('SELECT * FROM "workouts" ORDER BY id ASC;');
