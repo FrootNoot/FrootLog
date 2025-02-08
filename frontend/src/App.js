@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TodoList from './components/Todo/TodoList';
 import TodoForm from './components/Todo/TodoForm';
+import Navbar from './components/Navbar/Navbar';
 import styles from './App.module.css';
 import {Link} from 'react-router-dom'
 
@@ -64,15 +65,21 @@ function App() {
 
   return (
     <div className={styles.app}>
+      <Navbar></Navbar>
+    </div>
+  );
+
+   /*
+  return (
+    <div className={styles.app}>
       <h1 className={styles.header}>To-Do List</h1>
       <TodoForm addTodo={addTodo} />
       <TodoList todos={todos} toggleComplete={toggleComplete} deleteTodo={deleteTodo} />
       <Link to="/about"> to about </Link>
       <Link to="/dashboard"> to dashboard </Link>
-
-
     </div>
   );
+  */
 }
 
 export default App;
