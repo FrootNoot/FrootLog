@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TodoList from './components/Todo/TodoList';
 import TodoForm from './components/Todo/TodoForm';
+import HeroSection from './components/HeroSection/HeroSection';
 import Navbar from './components/Navbar/Navbar';
 import styles from './App.module.css';
 import {Link} from 'react-router-dom'
@@ -66,6 +67,8 @@ function App() {
   return (
     <div className={styles.app}>
       <Navbar></Navbar>
+      <HeroSection></HeroSection>
+
     </div>
   );
 
