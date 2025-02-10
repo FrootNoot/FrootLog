@@ -4,15 +4,15 @@ import styles from "./HeroSection.module.css";
 function HeroSection() {
 
   return (
-    <div id={styles.test}>
-      HIiii
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-      <h1>test</h1>
-
+    <div id={styles.mainParent}>
+      <h1>FROOTNOOT.FIT</h1>
+      <div id={styles.introContainer}>
+        <div id={styles.introText}>
+        <h1>check my progress</h1>
+        <p>wagabaga wagabaga wagabaga </p>
+        </div>
+        <div id={styles.imgPlaceholder}> image place holder </div>
+      </div>
     </div>
   );
 }
