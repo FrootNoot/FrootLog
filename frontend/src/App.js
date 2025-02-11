@@ -4,6 +4,7 @@ import TodoList from './components/Todo/TodoList';
 import TodoForm from './components/Todo/TodoForm';
 import HeroSection from './components/Home/HeroSection';
 import BodyButtons from './components/Home/BodyButtons';
+import Footer from './components/Home/Footer'; 
 
 import Navbar from './components/Navbar/Navbar';
 import styles from './App.module.css';
@@ -71,6 +72,7 @@ function App() {
       <Navbar></Navbar>
       <HeroSection></HeroSection>
       <BodyButtons></BodyButtons>
+      <Footer></Footer>
 
     </div>
   );
