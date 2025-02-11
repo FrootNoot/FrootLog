@@ -8,6 +8,12 @@
   height: 60vh;
 }
 
+.RmainArea {
+  background:linear-gradient(to left, #140e0e, #221e1e);
+  width: 50%;
+  height: 60vh;
+}
+
 .circles {
   height: 60vh;
   position: relative;
@@ -113,5 +119,106 @@
   display: flex;
 
 }
-#reverse{
+
+
+.Rcircles {
+  height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes Ranimate{
+  0%{
+    opacity: 1;
+    border-radius: 0;
+    transform: translateY(0) rotate(0deg);
+  }
+  100%{
+    opacity: 0;
+    border-radius: 80%;
+    transform: translateY(700px) rotate(720deg);
+  }
+}
+
+
+.Rcircles div {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgb(255, 255, 255);
+  top: -150px;
+  animation: Ranimate 25s linear infinite;
+}
+
+.Rcircles div:nth-child(1) {
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
+
+}
+
+.Rcircles div:nth-child(2) {
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 6s;
+  animation-duration: 12s;
+
+}
+
+.Rcircles div:nth-child(3) {
+  left: 70%;
+  width: 30px;
+  height: 30px;
+  animation-delay: 2s;
+  animation-duration: 8s;
+}
+
+.Rcircles div:nth-child(4) {
+  left: 53%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 1s;
+  animation-duration: 8s;
+}
+
+.Rcircles div:nth-child(5) {
+  left: 76%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 8s;
+  animation-duration: 17s;
+}
+
+.Rcircles div:nth-child(6) {
+  left: 44%;
+  width: 40px;
+  height: 40px;
+  animation-delay: 5s;
+  animation-duration: 8s;
+}
+
+.Rcircles div:nth-child(7) {
+  left: 33%;
+  width: 33px;
+  height: 33px;
+  animation-delay: 3s;
+  animation-duration: 9s;
+}
+
+.Rcircles div:nth-child(8) {
+  left: 77%;
+  width: 50px;
+  height: 50px;
+  animation-delay: 7s;
+  animation-duration: 12s;
+}
+
+.Rcircles div:nth-child(9) {
+  left: 52%;
+  width: 100px;
+  height: 100px;
+  animation-delay: 5s;
+  animation-duration: 15s;
 }

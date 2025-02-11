@@ -19,7 +19,20 @@ function BodyButtons() {
           <div></div>
          </div>
       </div>
-      <div id={styles.reverse} className={styles.mainArea}> </div>
+      <div id={styles.reverse} className={styles.RmainArea}> 
+      <div className={styles.Rcircles}>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+         </div>
+      </div>
     </div>
   );
 }
