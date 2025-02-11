@@ -8,8 +8,8 @@ function HeroSection() {
       <h1>FROOTNOOT.FIT</h1>
       <div id={styles.introContainer}>
         <div id={styles.introText}>
-        <h1>check my progress</h1>
-        <p>wagabaga wagabaga wagabaga </p>
+          <h1>check my progress</h1>
+          <p>wagabaga wagabaga wagabaga </p>
         </div>
         <div id={styles.imgPlaceholder}> image place holder </div>
       </div>
