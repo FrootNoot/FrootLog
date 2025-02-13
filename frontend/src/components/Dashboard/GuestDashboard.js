@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
-import styles from "./GuestDashboard.module.css";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import WorkoutList from '../WorkoutList/WorkoutList';
 
-function GuestDashboard () {
+const GuestDashboard = () => {
 
-  return (
-    <div className={styles.animationHolder}> 
-    guestDashboard
-    </div>
-  );
-}
+    return (
+        <div>
+          <WorkoutList></WorkoutList>
+        </div>
+    );
+};
 
-export default GuestDashboard ;
+export default GuestDashboard;
