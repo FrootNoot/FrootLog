@@ -20,6 +20,9 @@
   
 }
 
+.mainArea h1{
+
+}
 
 .RmainArea {
   background:linear-gradient(to left, #140e0e, #221e1e);
@@ -164,10 +167,6 @@
   top: -150px;
   left: 2%;
   animation: Ranimate 25s linear infinite;
-}
-
-.circles h1{
-  color: black;
 }
 
 .Rcircles div:nth-child(1) {

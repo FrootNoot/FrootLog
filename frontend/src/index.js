@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import About from './pages/About';
 import Dashboard from './pages/Dashboard';
+import GuestDashboard from './components/Dashboard/GuestDashboard'
+import AdminDashboard from './components/Dashboard/AdminDashboard'
 
 
 import reportWebVitals from './reportWebVitals';
@@ -20,7 +22,15 @@ const router = createBrowserRouter([{
 {
   path: '/dashboard',
   element: <Dashboard/>
-}
+},
+{
+  path: '/guestDashboard',
+  element: <GuestDashboard/>
+},
+{
+  path: '/adminDashboard',
+  element: <AdminDashboard/>
+},
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
