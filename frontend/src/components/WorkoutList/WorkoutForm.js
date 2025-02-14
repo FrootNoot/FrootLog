@@ -3,7 +3,7 @@ import axios from 'axios';
 import styles from './WorkoutForm.module.css';
 
 const WorkoutForm = () => {
-    const [workoutName, setWorkoutName] = useState('');
+    const [bodyweight, setbodyWeight] = useState('');
     const [date, setDate] = useState('');
     const [exercises, setExercises] = useState([{ name: '', weight: '', sets: '', reps: [] }]);
     const [suggestions, setSuggestions] = useState([]);
@@ -43,12 +43,11 @@ const WorkoutForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const workoutData = { workoutName, date, exercises };
-
+        const workoutData = { bodyweight, date, exercises };
         try {
             await axios.post('http://localhost:5000/exercises', workoutData);
             alert('Workout added successfully');
-            setWorkoutName('');
+            setbodyWeight('');
             setDate('');
             setExercises([{ name: '', weight: '', sets: '', reps: [] }]);
         } catch (error) {
@@ -60,8 +59,8 @@ const WorkoutForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label className={styles.title}>Workout Name:</label>
-                <input type="text" value={workoutName} onChange={(e) => setWorkoutName(e.target.value)} />
+                <label className={styles.title}>bodyweight:</label>
+                <input type="text" value={bodyweight} onChange={(e) => setbodyWeight(e.target.value)} />
             </div>
             <div>
                 <label>Date:</label>

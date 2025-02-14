@@ -46,11 +46,11 @@ exports.getWorkouts = async (req, res) => {
 };
 
 exports.addWorkout = async (req, res) => {
-  const { workoutName, date, exercises } = req.body;
+  const { bodyweight, date, exercises } = req.body;
   try {
     const result = await db.query(
-      'INSERT INTO workouts (workout_name, date) VALUES ($1, $2) RETURNING id',
-      [workoutName, date]
+      'INSERT INTO workouts (bodyweight, date) VALUES ($1, $2) RETURNING id',
+      [bodyweight, date]
     );
     const workoutId = result.rows[0].id;
 

@@ -24,7 +24,9 @@ function WorkoutItem({ workout }) {
 
   return (
     <li>
-        <span>Workout ID: {workout.id}</span>
+        <span>Workout ID: {workout.id} </span>
+        <span>Bodyweight: {workout.bodyweight}kgs </span>
+        
         <ul>
             {exercises.map((exercise) => (
                 <li key={exercise.id}>
@@ -32,6 +34,7 @@ function WorkoutItem({ workout }) {
                 </li>
             ))}
         </ul>
+        <br />
     </li>
 );
 }
