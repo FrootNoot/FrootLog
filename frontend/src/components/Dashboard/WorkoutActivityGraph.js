@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import axios from "axios";
+import styles from './WorkoutActivityGraph.module.css';
 
 // Function to check leap year
 const isLeapYear = (year) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -23,13 +24,9 @@ const generateHeatmapData = (workoutData, year) => {
     // Find matching workout data (convert date to YYYY-MM-DD format for comparison)
     const workoutEntry = workoutData.find(w => {
       const workoutDate = new Date(w.date).toISOString().split("T")[0]; // Convert to YYYY-MM-DD format
-      if (workoutDate === dateString){
-        console.log("frick")
-        return workoutDate === dateString;
-      }
+      return workoutDate === dateString;
     });
 
-    
     data.push({
       x: weekIndex,
       y: dayOfWeek,
@@ -43,7 +40,6 @@ const generateHeatmapData = (workoutData, year) => {
   return data;
 };
 
-
 const WorkoutActivityGraph = ({ year }) => {
   const [workoutData, setWorkoutData] = useState([]);
 
@@ -53,33 +49,58 @@ const WorkoutActivityGraph = ({ year }) => {
       .catch(error => console.error("Error fetching workout data:", error));
   }, [year]);
 
-  
-  
   const heatmapData = generateHeatmapData(workoutData, year);
 
+  // Dynamically calculate the start week of each month
+  const getMonthStartWeeks = () => {
+    const startWeeks = [];
+    const months = [
+      'January', 'February', 'March', 'April', 'May', 'June', 
+      'July', 'August', 'September', 'October', 'November', 'December'
+    ];
+
+    for (let month = 0; month < 12; month++) {
+      const date = new Date(year, month, 1);
+      const startWeek = Math.floor((date - new Date(`${year}-01-01`)) / (7 * 86400000));
+      startWeeks.push(startWeek);
+    }
+
+    return startWeeks;
+  };
+
+  const monthStartWeeks = getMonthStartWeeks();
+
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer width="100%" height={250}> {/* Added margin for left padding */}
       <ScatterChart>
-<XAxis
-  type="number"
-  dataKey="x"
-  name="Week"
-  axisLine={false}
-  domain={[0, 52]} // Set the max value to 52 weeks
-/>
-
-<YAxis
-  type="number"
-  dataKey="y"
-  name="Day"
-  axisLine={false}
-  domain={[0, 6]} // Set the max value to 6 (Saturday)
-  tickFormatter={(value) => {
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return daysOfWeek[value];
-  }}
-/>
-
+        <XAxis className={styles.move}
+          type="number"
+          dataKey="x"
+          name="Week"
+          dx={30}
+          axisLine={false}
+          domain={[0, 53]} // Weeks range
+          ticks={monthStartWeeks} // Dynamically created ticks for months
+          tickFormatter={(value) => {
+            const months = [
+              'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+            ];
+            const monthIndex = monthStartWeeks.indexOf(value);
+            return monthIndex !== -1 ? months[monthIndex] : '';
+          }}
+        />
+        <YAxis
+          type="number"
+          dataKey="y"
+          name="Day"
+          axisLine={false}
+          domain={[0, 6]} // Days of the week (0 - Sunday to 6 - Saturday)
+          tickFormatter={(value) => {
+            const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return daysOfWeek[value];
+          }}
+        />
         <Tooltip cursor={{ strokeDasharray: "3 3" }} />
         <Scatter
           data={heatmapData}
