@@ -13,7 +13,6 @@ const GuestDashboard = () => {
 
   return (
     <div>
-      <WorkoutList />
       <DashboardTab tabNames={tabNames} tabContents={tabContents} />
     </div>
   );

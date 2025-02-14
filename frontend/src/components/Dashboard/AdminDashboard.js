@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import WorkoutList from '../WorkoutList/WorkoutList';
 import WorkoutForm from '../WorkoutList/WorkoutForm';
+import DashboardTab from './DashboardTab';
 
 const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [enteredPassword, setEnteredPassword] = useState('');
+
+    const tabNames = ['Overview', 'Features', 'Pricing', 'Contact'];
+    const tabContents = [
+        <WorkoutList></WorkoutList>,
+        <WorkoutForm />,
+        <div><h2>Pricing</h2><p>Completely free to use!</p></div>,
+        <div><h2>Contact</h2><p>Reach out via our contact page.</p></div>
+    ];
 
     const handlePasswordSubmit = () => {
         if (enteredPassword === "a") {
@@ -30,9 +39,9 @@ const AdminDashboard = () => {
                 </div>
             ) : (
                 <div>
-              <WorkoutList></WorkoutList>
-              <WorkoutForm />
 
+                <DashboardTab tabNames={tabNames} tabContents={tabContents} />
+                
                 </div>
             )}
         </div>
