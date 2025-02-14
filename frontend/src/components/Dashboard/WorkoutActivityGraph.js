@@ -71,7 +71,7 @@ const WorkoutActivityGraph = ({ year }) => {
   const monthStartWeeks = getMonthStartWeeks();
 
   return (
-    <ResponsiveContainer width="100%" height={250}> {/* Added margin for left padding */}
+    <ResponsiveContainer className={styles.chartBackground} width={700} height={200}> {/* Added margin for left padding */}
       <ScatterChart>
         <XAxis className={styles.move}
           type="number"
@@ -91,13 +91,15 @@ const WorkoutActivityGraph = ({ year }) => {
           }}
         />
         <YAxis
+          className={styles.move2}
           type="number"
           dataKey="y"
           name="Day"
           axisLine={false}
-          domain={[0, 6]} // Days of the week (0 - Sunday to 6 - Saturday)
+          ticks={[1,3,5]}
+          domain={[0, 6]}
           tickFormatter={(value) => {
-            const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const daysOfWeek = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
             return daysOfWeek[value];
           }}
         />
