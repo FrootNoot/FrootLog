@@ -60,23 +60,26 @@ const WorkoutActivityGraph = ({ year }) => {
   return (
     <ResponsiveContainer width="100%" height={250}>
       <ScatterChart>
-        <XAxis
-          type="number"
-          dataKey="x"
-          name="Week"
-          tickFormatter={(week) => {
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            return months[Math.floor((week * 7) / 30)]; // Approximate month mapping
-          }}
-          axisLine={false}
-        />
-        <YAxis
-          type="number"
-          dataKey="y"
-          name="Day"
-          tickFormatter={(day) => ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"][day]}
-          axisLine={false}
-        />
+<XAxis
+  type="number"
+  dataKey="x"
+  name="Week"
+  axisLine={false}
+  domain={[0, 52]} // Set the max value to 52 weeks
+/>
+
+<YAxis
+  type="number"
+  dataKey="y"
+  name="Day"
+  axisLine={false}
+  domain={[0, 6]} // Set the max value to 6 (Saturday)
+  tickFormatter={(value) => {
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return daysOfWeek[value];
+  }}
+/>
+
         <Tooltip cursor={{ strokeDasharray: "3 3" }} />
         <Scatter
           data={heatmapData}
