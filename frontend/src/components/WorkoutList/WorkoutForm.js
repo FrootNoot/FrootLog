@@ -24,7 +24,7 @@ const WorkoutForm = () => {
 
         if (field === 'name' && value.trim()) {
             try {
-                const response = await axios.get('http://localhost:5000/exercises', {
+                const response = await axios.get('http://localhost:5000/exercises/search', {
                     params: { query: value },
                 });
                 setSuggestions(response.data);
@@ -46,7 +46,7 @@ const WorkoutForm = () => {
         const workoutData = { workoutName, date, exercises };
 
         try {
-            await axios.post('http://localhost:5000/workouts', workoutData);
+            await axios.post('http://localhost:5000/exercises', workoutData);
             alert('Workout added successfully');
             setWorkoutName('');
             setDate('');

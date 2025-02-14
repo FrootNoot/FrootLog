@@ -9,7 +9,7 @@ function WorkoutList() {
 
   const fetchWorkouts = useCallback(async () => {
     try {
-      const response = await axios.get('http://localhost:5000/workouts'); 
+      const response = await axios.get('http://localhost:5000/exercises/workouts'); 
       setWorkouts(response.data);
     } catch (error) {
       console.error('Error fetching workouts: ', error);

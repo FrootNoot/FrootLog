@@ -8,7 +8,7 @@ function WorkoutItem({ workout }) {
   const fetchExercises = useCallback(async () => {
     try {
         console.log(`Fetching exercises for workout ID: ${workout.id}`);
-        const response = await axios.get(`http://localhost:5000/exercises`, {
+        const response = await axios.get(`http://localhost:5000/exercises/`, {
             params: { workout_id: workout.id }
         });
         setExercises(response.data);
