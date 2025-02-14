@@ -3,6 +3,7 @@ import axios from 'axios';
 import WorkoutList from '../WorkoutList/WorkoutList';
 import WorkoutForm from '../WorkoutList/WorkoutForm';
 import DashboardTab from './DashboardTab';
+import WorkoutActivityGraph from './WorkoutActivityGraph';
 
 const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -12,7 +13,7 @@ const AdminDashboard = () => {
     const tabContents = [
         <WorkoutList></WorkoutList>,
         <WorkoutForm />,
-        <div><h2>Pricing</h2><p>Completely free to use!</p></div>,
+        <WorkoutActivityGraph year={2025} />,
         <div><h2>Contact</h2><p>Reach out via our contact page.</p></div>
     ];
 
@@ -41,7 +42,8 @@ const AdminDashboard = () => {
                 <div>
 
                 <DashboardTab tabNames={tabNames} tabContents={tabContents} />
-                
+                <WorkoutActivityGraph year={2025} />
+
                 </div>
             )}
         </div>

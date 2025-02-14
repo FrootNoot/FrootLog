@@ -82,3 +82,21 @@ exports.addWorkout = async (req, res) => {
     res.status(500).json({ error: 'Failed to save workout' });
   }
 };
+
+
+exports.workoutHistory = async (req, res) => {
+  const year = req.query.year || new Date().getFullYear();
+  try {
+    const result = await db.query(`
+      SELECT DISTINCT date
+      FROM workouts
+      WHERE EXTRACT(YEAR FROM date) = $1
+      ORDER BY date ASC;
+    `, [year]);
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching workout history:", err);
+    res.status(500).json({ error: "Failed to fetch workout history" });
+  }
+};

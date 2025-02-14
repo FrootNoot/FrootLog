@@ -7,6 +7,6 @@ router.get('/', exerciseController.getExercisesByWorkout);
 router.get('/search', exerciseController.searchExercises);
 router.get('/workouts', exerciseController.getWorkouts);
 router.post('/', exerciseController.addWorkout);
-
+router.get('/workoutHistory', exerciseController.workoutHistory)
 
 module.exports = router;
