@@ -67,7 +67,6 @@ const WorkoutActivityGraph = ({ year }) => {
   }, [year]);
 
   const heatmapData = generateHeatmapData(workoutData, year);
-
   // Dynamically calculate the start week of each month
   const getMonthStartWeeks = () => {
     const startWeeks = [];
@@ -89,6 +88,7 @@ const WorkoutActivityGraph = ({ year }) => {
   
 
   return (
+    <div>
     <ResponsiveContainer className={styles.chartBackground} width={700} height={200}> {/* Added margin for left padding */}
       <ScatterChart>
         <XAxis className={styles.move}
@@ -140,6 +140,22 @@ const WorkoutActivityGraph = ({ year }) => {
         />
       </ScatterChart>
     </ResponsiveContainer>
+
+    <div>
+            {!activeWorkout ? (
+                <div>
+                  "Click on a workout to view details"
+                </div>
+            ) : (
+                <div>
+                    <h2>Workout Details</h2>
+                    <p>Date: {activeWorkout}</p>
+                </div>
+            )}
+     </div>
+
+
+    </div>
   );
 };
 
