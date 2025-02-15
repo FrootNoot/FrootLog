@@ -6,6 +6,9 @@ import styles from './WorkoutActivityGraph.module.css';
 // Function to check leap year
 const isLeapYear = (year) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
+
+
+
 // Function to generate full-year heatmap data
 const generateHeatmapData = (workoutData, year) => {
   const daysInYear = isLeapYear(year) ? 366 : 365;
@@ -42,7 +45,21 @@ const generateHeatmapData = (workoutData, year) => {
 
 const WorkoutActivityGraph = ({ year }) => {
   const [workoutData, setWorkoutData] = useState([]);
+  const [activeWorkout, setActiveWorkout] = useState(null);
 
+
+  const handleClick = (payload) => {
+    if (payload.count > 0) {
+      setActiveWorkout(payload.date);
+    }
+  };
+
+
+  useEffect(() => {
+    console.log(activeWorkout);
+  }, [activeWorkout]);
+
+  
   useEffect(() => {
     axios.get(`http://localhost:5000/exercises/workoutHistory?year=${year}`)
       .then(response => setWorkoutData(response.data))
@@ -69,6 +86,7 @@ const WorkoutActivityGraph = ({ year }) => {
   };
 
   const monthStartWeeks = getMonthStartWeeks();
+  
 
   return (
     <ResponsiveContainer className={styles.chartBackground} width={700} height={200}> {/* Added margin for left padding */}
@@ -115,6 +133,8 @@ const WorkoutActivityGraph = ({ year }) => {
               height={10}
               fill={payload.count > 0 ? `rgba(255, 0, 0)` : "#eee"}
               rx={2}
+              onClick={() => handleClick(payload)}
+              style={{ cursor: payload.count > 0 ? 'pointer' : 'default' }}
             />
           )}
         />
