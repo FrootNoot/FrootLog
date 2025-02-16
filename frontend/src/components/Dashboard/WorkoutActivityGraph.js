@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import axios from "axios";
 import styles from './WorkoutActivityGraph.module.css';
+import ExerciseDisplay from "./ExerciseDisplay";
 
 // Function to check leap year
 const isLeapYear = (year) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
@@ -149,7 +150,7 @@ const WorkoutActivityGraph = ({ year }) => {
             ) : (
                 <div>
                     <h2>Workout Details</h2>
-                    <p>Date: {activeWorkout}</p>
+                    <ExerciseDisplay exerciseID={activeWorkout}> </ExerciseDisplay>
                 </div>
             )}
      </div>
