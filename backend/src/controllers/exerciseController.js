@@ -50,7 +50,7 @@ exports.addWorkout = async (req, res) => {
   try {
     const result = await db.query(
       'INSERT INTO workouts (bodyweight, date) VALUES ($1, $2) RETURNING id',
-      [bodyweight, date]
+      [bodyweight, date]  // Ensure `date` is just a date in "YYYY-MM-DD" format
     );
     const workoutId = result.rows[0].id;
 
@@ -84,22 +84,42 @@ exports.addWorkout = async (req, res) => {
 };
 
 
+
 exports.workoutHistory = async (req, res) => {
   const year = req.query.year || new Date().getFullYear();
   try {
     const result = await db.query(`
-      SELECT DISTINCT date
-      FROM workouts
-      WHERE EXTRACT(YEAR FROM date) = $1
-      ORDER BY date ASC;
-    `, [year]);
+      SELECT date FROM workouts
+      ORDER BY id ASC
+    `);
 
+    // No need for toISOString since it's already a string in "YYYY-MM-DD" format
+    const formattedResults = result.rows.map(row => ({
+      date: row.date // Just return the string as it is
+    }));
+
+    res.json(formattedResults);
+  } catch (err) {
+    console.error("Error fetching workout history:", err);
+    res.status(500).json({ error: "Failed to fetch workout history" });
+  }
+};
+
+
+/* exports.workoutHistory = async (req, res) => {
+  const year = req.query.year || new Date().getFullYear();
+  try {
+    const result = await db.query(`
+    SELECT date FROM workouts ORDER BY id ASC
+    `);
     res.json(result.rows);
   } catch (err) {
     console.error("Error fetching workout history:", err);
     res.status(500).json({ error: "Failed to fetch workout history" });
   }
 };
+*/
+
 
 
 

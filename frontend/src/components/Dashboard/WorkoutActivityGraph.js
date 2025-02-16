@@ -53,7 +53,7 @@ const WorkoutActivityGraph = ({ year }) => {
     if (payload.count > 0) {
       console.log(payload.date);
         axios.get(`http://localhost:5000/exercises/workoutByDate?date=${payload.date}`)
-          .then(response => setActiveWorkout(response.data))
+          .then(response => setActiveWorkout(response.data[0]))
           .catch(error => console.error("Error fetching workout data:", error));
     }
   };
@@ -146,17 +146,19 @@ const WorkoutActivityGraph = ({ year }) => {
     </ResponsiveContainer>
 
     <div>
-            {!activeWorkout ? (
-                <div>
-                  "Click on a workout to view details"
-                </div>
-            ) : (
-                <div>
-                    <h2>Workout Details</h2>
-                    <ExerciseDisplay exerciseID={activeWorkout}> </ExerciseDisplay>
-                </div>
-            )}
-     </div>
+  {!activeWorkout ? (
+    <div>
+      "Click on a workout to view details"
+    </div>
+  ) : (
+    <div>
+      <h2>Workout Details</h2>
+      {/* Make sure you're passing specific properties if necessary */}
+      <ExerciseDisplay exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
+    </div>
+  )}
+</div>
+
 
 
     </div>
