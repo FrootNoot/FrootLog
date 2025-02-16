@@ -42,8 +42,6 @@ const AdminDashboard = () => {
                 <div>
 
                 <DashboardTab tabNames={tabNames} tabContents={tabContents} />
-                <WorkoutActivityGraph year={2025} />
-
                 </div>
             )}
         </div>

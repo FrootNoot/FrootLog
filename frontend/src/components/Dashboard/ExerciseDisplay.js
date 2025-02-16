@@ -1,17 +1,20 @@
 import React from "react";
 import styles from "./ExerciseDisplay.module.css";
+import WorkoutItem from "../WorkoutList/WorkoutItem";
 
 const ExerciseDisplay = ({ exerciseID, bodyweight, date }) => {
-  console.log(exerciseID, bodyweight, date); // Log props to verify they are being passed correctly
+
+  const workout = {
+    id: exerciseID,
+    bodyweight: bodyweight,
+    date: date,
+  };
 
   return (
     <div>
-      <p>Exercise ID: {exerciseID}</p>
-      <p>Bodyweight: {bodyweight}</p>
-      <p>Date: {date}</p>
+      <WorkoutItem workout={workout} />
     </div>
   );
 };
 
 export default ExerciseDisplay;
-
