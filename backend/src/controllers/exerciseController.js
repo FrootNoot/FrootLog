@@ -100,3 +100,21 @@ exports.workoutHistory = async (req, res) => {
     res.status(500).json({ error: "Failed to fetch workout history" });
   }
 };
+
+
+
+exports.workoutByDate = async (req, res) => {
+  const date = req.query.date
+  try {
+    const result = await db.query(`
+      SELECT *
+      FROM workouts
+      WHERE date = $1
+      LIMIT 3;
+    `, [date]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching workout date:", err);
+    res.status(500).json({ error: "Failed to fetch workout date" });
+  }
+};

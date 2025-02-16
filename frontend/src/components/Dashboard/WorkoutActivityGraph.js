@@ -51,7 +51,10 @@ const WorkoutActivityGraph = ({ year }) => {
 
   const handleClick = (payload) => {
     if (payload.count > 0) {
-      setActiveWorkout(payload.date);
+      console.log(payload.date);
+        axios.get(`http://localhost:5000/exercises/workoutByDate?date=${payload.date}`)
+          .then(response => setActiveWorkout(response.data))
+          .catch(error => console.error("Error fetching workout data:", error));
     }
   };
 
