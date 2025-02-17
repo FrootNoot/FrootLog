@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import WorkoutList from '../WorkoutList/WorkoutList';
+import SummaryStats from './SummaryStats';
 import WorkoutForm from '../WorkoutList/WorkoutForm';
 import DashboardTab from './DashboardTab';
 import WorkoutActivityGraph from './WorkoutActivityGraph';
@@ -11,7 +11,7 @@ const AdminDashboard = () => {
 
     const tabNames = ['Overview', 'Features', 'Pricing', 'Contact'];
     const tabContents = [
-        <WorkoutList></WorkoutList>,
+        <SummaryStats/>,
         <WorkoutForm />,
         <WorkoutActivityGraph year={2025} />,
         <div><h2>Contact</h2><p>Reach out via our contact page.</p></div>
@@ -40,7 +40,6 @@ const AdminDashboard = () => {
                 </div>
             ) : (
                 <div>
-
                 <DashboardTab tabNames={tabNames} tabContents={tabContents} />
                 </div>
             )}
