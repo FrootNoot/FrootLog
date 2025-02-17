@@ -8,7 +8,7 @@ exports.getExercisesByWorkout = async (req, res) => {
   const { workout_id } = req.query;
   try {
     const result = await db.query(
-      `SELECT e.id, e.name, we.weight, we.sets, we.reps 
+      `SELECT e.id, e.name, we.weight, we.sets, we.reps, we.id as workoutExerciseId
        FROM workout_exercises we
        JOIN exercises e ON we.exercise_id = e.id
        WHERE we.workout_id = $1`,
@@ -136,5 +136,77 @@ exports.workoutByDate = async (req, res) => {
   } catch (err) {
     console.error("Error fetching workout date:", err);
     res.status(500).json({ error: "Failed to fetch workout date" });
+  }
+};
+
+exports.workoutByDate = async (req, res) => {
+  const date = req.query.date
+  try {
+    const result = await db.query(`
+      SELECT *
+      FROM workouts
+      WHERE date = $1
+      LIMIT 3;
+    `, [date]);
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Error fetching workout date:", err);
+    res.status(500).json({ error: "Failed to fetch workout date" });
+  }
+};
+
+exports.updateExercise = async (req, res) => {
+  const { reps, sets, weight } = req.body;
+  const id = req.params.exercise_id; // Accessing the specific parameter
+
+  try {
+    console.log(req.body);
+    console.log(id);
+    await db.query(
+      'UPDATE workout_exercises SET weight = $1, sets = $2 , reps = $3 WHERE id = $4 ',
+      [weight, sets, reps, id]
+    );
+
+    res.status(200).json({ message: 'Exercise updated successfully' });
+  } catch (error) {
+    console.error('Error updating Exercise:', error);
+    res.status(500).json({ error: 'Failed to update Exercise' });
+  }
+
+
+};
+
+exports.updateWorkout = async (req, res) => {
+  const { bodyweight, date} = req.body;
+  const { workout_id } = req.params; 
+
+  try {
+    await db.query(
+      'UPDATE workouts SET bodyweight = $1, date = $2 WHERE id = $3',
+      [bodyweight, date, workout_id]
+    );
+
+    res.status(200).json({ message: 'Workout updated successfully' });
+  } catch (error) {
+    console.error('Error updating workout:', error);
+    res.status(500).json({ error: 'Failed to update workout' });
+  }
+};
+
+
+exports.deleteWorkout = async (req, res) => {
+  const { workout_id } = req.params;
+
+  try {
+    // Delete related exercises first to maintain foreign key integrity
+    await db.query('DELETE FROM workout_exercises WHERE workout_id = $1', [workout_id]);
+
+    // Delete the workout
+    await db.query('DELETE FROM workouts WHERE id = $1', [workout_id]);
+
+    res.status(200).json({ message: 'Workout deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting workout:', error);
+    res.status(500).json({ error: 'Failed to delete workout' });
   }
 };
