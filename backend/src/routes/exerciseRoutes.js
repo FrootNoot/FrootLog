@@ -7,6 +7,7 @@ router.get('/', exerciseController.getExercisesByWorkout);
 router.get('/search', exerciseController.searchExercises);
 router.get('/latest', exerciseController.getLatestWorkout);
 router.get('/workouts', exerciseController.getWorkouts);
+router.get('/yearlyWorkout', exerciseController.countYearlyWorkout);
 router.get('/countworkouts', exerciseController.getCountWorkoutWeek);
 router.get('/frequentexercise', exerciseController.getMostFrequentExercise);
 router.post('/', exerciseController.addWorkout);

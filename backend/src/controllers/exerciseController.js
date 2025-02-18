@@ -257,3 +257,21 @@ exports.getMostFrequentExercise = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch workouts' });
   }
 };
+
+
+exports.countYearlyWorkout = async (req, res) => {
+  const { year } = req.body;
+  try {
+    const result = await db.query(
+      `SELECT COUNT(*)
+      FROM workouts
+      WHERE date LIKE $1
+      `,
+      [`%${year}%`]
+    );
+    res.status(200).json(result.rows);
+  } catch (error) {
+    console.error('Error fetching exercises:', error);
+    res.status(500).json({ error: 'Failed to fetch exercises' });
+  }
+};
