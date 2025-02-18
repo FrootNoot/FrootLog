@@ -240,3 +240,20 @@ exports.getCountWorkoutWeek = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch workouts' });
   }
 };
+
+exports.getMostFrequentExercise = async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT exercises.name, COUNT(exercise_id) as count_value
+      FROM workout_exercises
+      JOIN exercises ON workout_exercises.exercise_id = exercises.id
+      GROUP BY exercises.name
+      ORDER BY count_value DESC
+      LIMIT(1)
+      `);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error latest workout:', err.stack);
+    res.status(500).json({ error: 'Failed to fetch workouts' });
+  }
+};
