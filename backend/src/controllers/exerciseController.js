@@ -210,3 +210,18 @@ exports.deleteWorkout = async (req, res) => {
     res.status(500).json({ error: 'Failed to delete workout' });
   }
 };
+
+exports.getLatestWorkout = async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT id, bodyweight, date
+      FROM workouts
+      ORDER BY (TO_DATE(date, 'YYYY-MM-DD')) DESC
+      LIMIT(1)
+      `);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error latest workout:', err.stack);
+    res.status(500).json({ error: 'Failed to fetch workouts' });
+  }
+};
