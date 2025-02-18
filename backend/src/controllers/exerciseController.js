@@ -225,3 +225,18 @@ exports.getLatestWorkout = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch workouts' });
   }
 };
+
+exports.getCountWorkoutWeek = async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT COUNT(*) AS total_workouts
+      FROM workouts
+      WHERE TO_DATE(date, 'YYYY-MM-DD') >= CURRENT_DATE - INTERVAL '7 days';
+
+      `);
+    res.status(200).json(result.rows);
+  } catch (err) {
+    console.error('Error latest workout:', err.stack);
+    res.status(500).json({ error: 'Failed to fetch workouts' });
+  }
+};
