@@ -260,8 +260,9 @@ exports.getMostFrequentExercise = async (req, res) => {
 
 
 exports.countYearlyWorkout = async (req, res) => {
-  const { year } = req.body;
+  const { year } = req.query;
   try {
+    console.log(year);
     const result = await db.query(
       `SELECT COUNT(*)
       FROM workouts
