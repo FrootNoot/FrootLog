@@ -71,7 +71,6 @@ const WorkoutActivityGraph = ({ year }) => {
   }, [year]);
 
   const heatmapData = generateHeatmapData(workoutData, year);
-  // Dynamically calculate the start week of each month
   const getMonthStartWeeks = () => {
     const startWeeks = [];
     const months = [
@@ -101,8 +100,8 @@ const WorkoutActivityGraph = ({ year }) => {
           name="Week"
           dx={30}
           axisLine={false}
-          domain={[0, 53]} // Weeks range
-          ticks={monthStartWeeks} // Dynamically created ticks for months
+          domain={[0, 53]} 
+          ticks={monthStartWeeks} 
           tickFormatter={(value) => {
             const months = [
               'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
