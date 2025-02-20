@@ -3,3 +3,15 @@
   flex-direction: column;
   width: 100%;
 }
+
+:root {
+  --seasalt: #F8F9FA;
+  --antiFlashWhite: #E9ECEF;
+  --platinum: #DEE2E6;
+  --frenchGray: #CED4DA;
+  --middleGray: #ADB5BD;
+  --slateGray: #6C757D;
+  --outerSpace: #495057;
+  --onyx: #343A40;
+  --eerieBlack: #212529;
+}
