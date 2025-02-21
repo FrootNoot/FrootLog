@@ -4,6 +4,7 @@ import SummaryStats from './SummaryStats';
 import WorkoutForm from '../WorkoutList/WorkoutForm';
 import DashboardTab from './DashboardTab';
 import WorkoutActivityGraph from './WorkoutActivityGraph';
+import styles from './AdminDashboard.module.css';
 
 const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -26,7 +27,7 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div>
+        <div className={styles.adminContainer}>
             <h2>Admin Dashboard</h2>
             {!isAdmin ? (
                 <div>
