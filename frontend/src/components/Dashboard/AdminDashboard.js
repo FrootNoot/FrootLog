@@ -4,6 +4,7 @@ import SummaryStats from './SummaryStats';
 import WorkoutForm from '../WorkoutList/WorkoutForm';
 import DashboardTab from './DashboardTab';
 import WorkoutActivityGraph from './WorkoutActivityGraph';
+import MorphingBackground from './MorphingBackground'; 
 import styles from './AdminDashboard.module.css';
 
 const AdminDashboard = () => {
@@ -28,22 +29,23 @@ const AdminDashboard = () => {
 
     return (
         <div className={styles.adminContainer}>
-            <h2>Admin Dashboard</h2>
-            {!isAdmin ? (
-                <div>
-                    <input 
-                        type="password"
-                        placeholder="Enter password"
-                        value={enteredPassword}
-                        onChange={(e) => setEnteredPassword(e.target.value)}
-                    />
-                    <button onClick={handlePasswordSubmit}>Submit</button>
-                </div>
-            ) : (
-                <div>
-                <DashboardTab tabNames={tabNames} tabContents={tabContents} />
-                </div>
-            )}
+            <MorphingBackground /> {/* Background Animation */}
+            <div className={styles.content}>
+                <h2>Admin Dashboard</h2>
+                {!isAdmin ? (
+                    <div>
+                        <input 
+                            type="password"
+                            placeholder="Enter password"
+                            value={enteredPassword}
+                            onChange={(e) => setEnteredPassword(e.target.value)}
+                        />
+                        <button onClick={handlePasswordSubmit}>Submit</button>
+                    </div>
+                ) : (
+                    <DashboardTab tabNames={tabNames} tabContents={tabContents} />
+                )}
+            </div>
         </div>
     );
 };
