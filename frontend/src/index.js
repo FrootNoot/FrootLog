@@ -6,30 +6,51 @@ import About from './pages/About';
 import Dashboard from './pages/Dashboard';
 import GuestDashboard from './components/Dashboard/GuestDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
+import Layout from './components/Navbar/Layout';
 
 
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider} from 'react-router-dom';
 
-const router = createBrowserRouter([{
+const router = createBrowserRouter([  {
   path: '/',
-  element: <App/>,
+  element: (
+    <Layout>
+      <App />
+    </Layout>
+  ),
 },
 {
   path: '/about',
-  element: <About/>
+  element: (
+    <Layout>
+      <About />
+    </Layout>
+  ),
 },
 {
   path: '/dashboard',
-  element: <Dashboard/>
+  element: (
+    <Layout>
+      <Dashboard />
+    </Layout>
+  ),
 },
 {
   path: '/guestDashboard',
-  element: <GuestDashboard/>
+  element: (
+    <Layout>
+      <GuestDashboard />
+    </Layout>
+  ),
 },
 {
   path: '/adminDashboard',
-  element: <AdminDashboard/>
+  element: (
+    <Layout>
+      <AdminDashboard />
+    </Layout>
+  ),
 },
 ]);
 
