@@ -41,7 +41,7 @@ const AdminDashboard = () => {
                             value={enteredPassword}
                             onChange={(e) => setEnteredPassword(e.target.value)}
                         />
-                        <button onClick={handlePasswordSubmit}>Submit</button>
+                        <button onClick={handlePasswordSubmit}>Submitothy</button>
                     </div>
                 ) : (
                     <DashboardTab tabNames={tabNames} tabContents={tabContents} />

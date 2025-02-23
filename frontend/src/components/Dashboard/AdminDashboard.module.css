@@ -43,3 +43,9 @@
     background-color: #343A40;
 }
 
+.adminForm input{
+    border-radius: 15px;
+    padding: 10px;
+    width: 50%;
+}
+
