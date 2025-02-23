@@ -1,7 +1,11 @@
 .tabsContainer {
     max-width: 600px;
     margin: 0 auto;
-    font-family: Arial, sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 
 .tabsContainer h1 {
@@ -11,8 +15,7 @@
 
 .tabButtons {
     display: flex;
-    gap: 4px;
-    margin-top: 14px;
+    gap: 4px;    
 }
 
 .tabButtons button {
