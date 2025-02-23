@@ -1,3 +1,45 @@
 .adminContainer{
     height: 100vh;
 }
+
+.adminForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff;
+    padding: 1vw;
+    border-radius: 15px;
+    font-size: 15px;
+}
+
+.adminForm h1{
+    margin-bottom: 0px;
+}
+
+.adminForm p{
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.adminForm button{
+    background-color: black;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    padding: 10px;
+    margin-top: 15px;
+
+}
+
+.adminForm button:hover{
+    background-color: #343A40;
+}
+

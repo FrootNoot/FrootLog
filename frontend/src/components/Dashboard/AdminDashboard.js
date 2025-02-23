@@ -29,11 +29,12 @@ const AdminDashboard = () => {
 
     return (
         <div className={styles.adminContainer}>
-            <MorphingBackground /> {/* Background Animation */}
+            <MorphingBackground /> 
             <div className={styles.content}>
-                <h2>Admin Dashboard</h2>
                 {!isAdmin ? (
-                    <div>
+                    <div className={styles.adminForm}>
+                        <h1> Froot Noot login page</h1>
+                        <p>Enter password to access admin dashboard</p>
                         <input 
                             type="password"
                             placeholder="Enter password"
