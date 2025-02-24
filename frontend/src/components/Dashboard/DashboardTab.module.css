@@ -29,9 +29,17 @@
     cursor: pointer;
     border: none;
     background-color: #f1f1f1;
-  
     transition: background-color 0.3s;
 }
+
+.tabButtons button:first-child {
+    border-radius: 10px 10px 0 0; 
+}
+
+.tabButtons button:last-child {
+    border-radius: 0 0 10px 10px; 
+}
+
 
 .tabButtons button:hover {
     color: white;
@@ -66,7 +74,6 @@
 @media screen and (max-width: 768px) {
     .tabButtons {
       flex-direction: row;
-      background-color: red;
       position: absolute;
       left: auto;
       top: 10%;    
@@ -79,6 +86,15 @@
         flex-direction: column;
         height: 100%;
     }
+
+    .tabButtons button:first-child {
+        border-radius: 10px 0 0 10px; 
+    }
+
+    .tabButtons button:last-child {
+        border-radius: 0 10px 10px 0; 
+    }
+    
   
     
 
