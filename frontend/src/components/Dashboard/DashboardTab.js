@@ -17,6 +17,7 @@ function DashboardTab({ tabNames, tabContents }) {
           </button>
         ))}
       </div>
+      <div id={styles.spacer}></div>
 
       <div className={styles.tabContent}>
         {tabContents[activeTab]}
