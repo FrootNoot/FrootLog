@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './SummaryStats.module.css';
 
 const SummaryStats = () => {
     const [latestWorkout, setLatestWorkout] = useState(null);
@@ -42,8 +43,16 @@ const SummaryStats = () => {
     }, []); 
 
     return (
-        <div>
+        <div className={styles.summaryContainer}>
             <h1>Summary Stats</h1>
+            <h2>Second item</h2>
+        </div>
+    );
+};
+
+export default SummaryStats;
+
+/*
 
             {latestWorkout && (
                 <div>
@@ -75,8 +84,5 @@ const SummaryStats = () => {
                     <p>Total Workouts: {yearlyWorkoutCount[0].count}</p>
                 </div>
             )}
-        </div>
-    );
-};
 
-export default SummaryStats;
+*/

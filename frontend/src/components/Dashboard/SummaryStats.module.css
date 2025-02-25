@@ -1,0 +1,19 @@
+.summaryContainer{
+    display: flex;
+    align-items: center;
+}
+
+.summaryContainer h1{
+    width: 70%;
+    background-color: red;
+}
+
+.summaryContainer h2{
+    width: 30%;
+    background-color: green;
+}
+
+.summaryContainer h1,
+.summaryContainer h2 {
+    flex-grow: 1;
+}

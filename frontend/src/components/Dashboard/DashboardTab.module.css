@@ -54,22 +54,13 @@
 
 .tabContent {
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #f9f9f9;
     min-width: 400px;
     max-width: 50vw;
 }
 
-.tabContent h2 {
-    margin-top: 0;
-    font-weight: bold;
-    font-size: 24px;
-}
 
-.tabContent p {
-    margin: 5px 0 0;
-}
 
 @media screen and (max-width: 768px) {
     .tabButtons {
