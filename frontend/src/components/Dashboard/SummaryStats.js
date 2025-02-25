@@ -44,8 +44,14 @@ const SummaryStats = () => {
 
     return (
         <div className={styles.summaryContainer}>
-            <h1>Summary Stats</h1>
-            <h2>Second item</h2>
+            <h1>ermmm wahoo</h1>
+            <div className={styles.stat}>stat 1</div>
+            <div className={styles.stat}>stat 2</div>
+            <div className={styles.stat}>stat 3</div>
+            <div className={styles.stat}>stat 4</div>
+            <div id={styles.recentWorkout}>
+                Workout stuff
+            </div>
         </div>
     );
 };
