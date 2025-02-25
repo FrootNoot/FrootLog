@@ -160,8 +160,6 @@ exports.updateExercise = async (req, res) => {
   const id = req.params.exercise_id; // Accessing the specific parameter
 
   try {
-    console.log(req.body);
-    console.log(id);
     await db.query(
       'UPDATE workout_exercises SET weight = $1, sets = $2 , reps = $3 WHERE id = $4 ',
       [weight, sets, reps, id]
@@ -262,7 +260,6 @@ exports.getMostFrequentExercise = async (req, res) => {
 exports.countYearlyWorkout = async (req, res) => {
   const { year } = req.query;
   try {
-    console.log(year);
     const result = await db.query(
       `SELECT COUNT(*)
       FROM workouts

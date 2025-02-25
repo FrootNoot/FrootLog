@@ -58,9 +58,6 @@ const WorkoutActivityGraph = ({ year }) => {
   };
 
 
-  useEffect(() => {
-    console.log(activeWorkout);
-  }, [activeWorkout]);
 
   
   useEffect(() => {
