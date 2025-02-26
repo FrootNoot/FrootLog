@@ -45,10 +45,24 @@ const SummaryStats = () => {
     return (
         <div className={styles.summaryContainer}>
             <h1>Froot Noot Stats</h1>
-            <div className={styles.stat}>stat 1</div>
-            <div className={styles.stat}>stat 2</div>
-            <div className={styles.stat}>stat 3</div>
-            <div className={styles.stat}>stat 4</div>
+            <div className={styles.stat}>
+                {latestWorkout && (<h2>Current Bodyweight {latestWorkout[0].bodyweight}</h2>)}
+            </div>
+
+            <div className={styles.stat}>
+                {mostFrequentExercise && (<h2> {mostFrequentExercise[0].name} {mostFrequentExercise[0].count_value} </h2>)}
+            </div>
+
+
+            <div className={styles.stat}> 
+                {workoutCountWeek && (<h2> Workouts this week {workoutCountWeek[0].total_workouts}</h2>)}
+
+            </div>
+
+
+            <div className={styles.stat}> 
+            {yearlyWorkoutCount && (<h2> Workouts this year {yearlyWorkoutCount[0].count}</h2>)}
+            </div>
             <div id={styles.recentWorkout}>
                 Workout stuff
             </div>
