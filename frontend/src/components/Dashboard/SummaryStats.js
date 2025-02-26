@@ -85,8 +85,10 @@ const SummaryStats = () => {
             </div>
 
             <div className={styles.recentWorkout}>
-                <h2>Latest Workout on {latestWorkout[0].date}</h2>
-                {latestExercises && (
+                {latestWorkout && latestWorkout.length > 0 && (
+                    <h2>Latest Workout on {latestWorkout[0].date}</h2>
+                )}
+                {latestExercises && latestExercises.length > 0 && (
                     latestExercises.map((exercise, index) => (
                         <div key={index} className={styles.exerciseItem}>
                             <p><strong>{exercise.name}</strong></p>
