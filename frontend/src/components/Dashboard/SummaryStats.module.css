@@ -10,12 +10,7 @@
 }
 
 
-.stat {
-    background-color: green;
-    height: 83px;
-    padding-top: 20px; 
-    padding-bottom: 20px; 
-}
+
 
 .summaryContainer h1{
     background-color: gray;
@@ -27,17 +22,16 @@
 }
 
 .stat{
-    flex-basis: 10.33%;
     margin-top: 30px;
-    margin-left: 10%;
-    margin-right: 10%;
     border-radius: 10px;
+    background-color: green;
+    height: 83px;
+    
 }
 
 .stat:first-of-type{
     background-color: red;
     flex-basis: 20%;
-
     margin: 0px 0px 0px 0px ;
 }
 
