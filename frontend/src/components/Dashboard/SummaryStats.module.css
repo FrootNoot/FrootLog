@@ -13,8 +13,8 @@
 
 
 .summaryContainer h1{
-    background-color: gray;
     flex-basis: 70%;
+    background-color: gray;
     padding-left: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -22,17 +22,34 @@
 }
 
 .stat{
-    margin-top: 30px;
     border-radius: 10px;
     background-color: green;
-    height: 83px;
-    
+    height: 150px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 15vw;
+    min-width: 150px;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 20px;
+
+}
+
+.stat h2{
+    position: absolute;
+    top: 50%;
+    color: blue;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .stat:first-of-type{
     background-color: red;
-    flex-basis: 20%;
+    flex-basis: 10%;
     margin: 0px 0px 0px 0px ;
+
 }
 
 #recentWorkout{
@@ -40,3 +57,29 @@
     text-align: center;
     margin-top: 50px;
 }
+
+
+@media screen and (max-width: 1000px) {
+    .summaryContainer h1{
+        text-align: center;
+
+    }
+    
+    .stat:first-of-type{
+        background-color: green;
+        flex-basis: 40%;
+        margin-top: 20px;
+        padding-bottom: 20px;
+
+    }
+
+    .stat{
+        flex-basis: 40%;
+        height: 125px;
+        padding-bottom: 20px;
+
+    }
+
+
+  }
+  

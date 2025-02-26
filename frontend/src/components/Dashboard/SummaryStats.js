@@ -45,10 +45,10 @@ const SummaryStats = () => {
     return (
         <div className={styles.summaryContainer}>
             <h1>Froot Noot Stats</h1>
-            
+
             <div className={styles.stat}>
                 {latestWorkout && ( <div>
-                    <p> Current Bodyweight</p> <h2>{latestWorkout[0].bodyweight}</h2>
+                    <p> Current weight</p> <h2>{latestWorkout[0].bodyweight}</h2>
                     </div>)}
             </div>
 
@@ -61,7 +61,7 @@ const SummaryStats = () => {
 
             <div className={styles.stat}> 
                 {workoutCountWeek && (<div>
-                    <p> Workouts this week </p> <h2>{workoutCountWeek[0].total_workouts}</h2>
+                    <p>Workouts this week</p> <h2>{workoutCountWeek[0].total_workouts}</h2>
                     </div>)}
 
             </div>
