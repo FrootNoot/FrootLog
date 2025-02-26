@@ -44,7 +44,7 @@ const SummaryStats = () => {
 
     return (
         <div className={styles.summaryContainer}>
-            <h1>ermmm wahoo</h1>
+            <h1>Froot Noot Stats</h1>
             <div className={styles.stat}>stat 1</div>
             <div className={styles.stat}>stat 2</div>
             <div className={styles.stat}>stat 3</div>

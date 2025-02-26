@@ -5,16 +5,25 @@
     flex-wrap: wrap;
     margin-left: -20px;
     justify-content: space-around;
+    min-width: 400px;
+    
 }
 
 
 .stat {
     background-color: green;
+    height: 83px;
+    padding-top: 20px; 
+    padding-bottom: 20px; 
 }
 
 .summaryContainer h1{
-    background-color: rebeccapurple;
+    background-color: gray;
     flex-basis: 70%;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 10px;
 }
 
 .stat{
@@ -22,6 +31,7 @@
     margin-top: 30px;
     margin-left: 10%;
     margin-right: 10%;
+    border-radius: 10px;
 }
 
 .stat:first-of-type{
