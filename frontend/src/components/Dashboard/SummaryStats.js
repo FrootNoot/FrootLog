@@ -4,6 +4,7 @@ import styles from './SummaryStats.module.css';
 
 const SummaryStats = () => {
     const [latestWorkout, setLatestWorkout] = useState(null);
+    const [latestExercises, setLatestExercises] = useState(null);
     const [workoutCountWeek, setWorkoutCountWeek] = useState(null);
     const [mostFrequentExercise, setMostFrequentExercise] = useState(null);
     const [yearlyWorkoutCount, setYearlyWorkoutCount] = useState(null);
@@ -33,14 +34,27 @@ const SummaryStats = () => {
                 console.error('Error fetching most frequent exercise:', error);
             });
 
-        axios.get('http://localhost:5000/exercises/yearlyWorkout', { params: { year: (new Date().getFullYear()) }, })
+        axios.get('http://localhost:5000/exercises/yearlyWorkout', { params: { year: new Date().getFullYear() } })
             .then(response => {
                 setYearlyWorkoutCount(response.data);
             })
             .catch(error => {
                 console.error('Error fetching yearly workout count:', error);
             });
+
     }, []); 
+
+    useEffect(() => {
+        if (latestWorkout && latestWorkout.length > 0) {
+            axios.get(`http://localhost:5000/exercises/?workout_id=${latestWorkout[0].id}`)
+                .then(response => {
+                    setLatestExercises(response.data);
+                })
+                .catch(error => {
+                    console.error('Error fetching exercises for latest workout:', error);
+                });
+        }
+    }, [latestWorkout]);
 
     return (
         <div className={styles.summaryContainer}>
@@ -58,61 +72,31 @@ const SummaryStats = () => {
                     </div>)}
             </div>
 
-
             <div className={styles.stat}> 
                 {workoutCountWeek && (<div>
                     <p>Workouts this week</p> <h2>{workoutCountWeek[0].total_workouts}</h2>
                     </div>)}
-
             </div>
-
 
             <div className={styles.stat}> 
-            {yearlyWorkoutCount && (<div>
-                <p>Workouts this year</p> <h2>{yearlyWorkoutCount[0].count}</h2>
-                </div>)}
+                {yearlyWorkoutCount && (<div>
+                    <p>Workouts this year</p> <h2>{yearlyWorkoutCount[0].count}</h2>
+                    </div>)}
             </div>
 
-            <div id={styles.recentWorkout}>
-                Workout stuff
+            <div className={styles.recentWorkout}>
+                <h2>Latest Workout Exercises</h2>
+                {latestExercises && (
+                    latestExercises.map((exercise, index) => (
+                        <div key={index} className={styles.exerciseItem}>
+                            <p><strong>{exercise.name}</strong></p>
+                            <p>Sets: {exercise.sets}, Reps: {exercise.reps}, Weight: {exercise.weight}kg</p>
+                        </div>
+                    ))
+                )}
             </div>
         </div>
     );
 };
 
 export default SummaryStats;
-
-/*
-
-            {latestWorkout && (
-                <div>
-                    <h2>Latest Workout</h2>
-                    <p>ID: {latestWorkout[0].id}</p>
-                    <p>Bodyweight: {latestWorkout[0].bodyweight}</p>
-                    <p>Date: {latestWorkout[0].date}</p>
-                </div>
-            )}
-
-            {workoutCountWeek && (
-                <div>
-                    <h2>Workouts in the Last 7 Days</h2>
-                    <p>Total Workouts: {workoutCountWeek[0].total_workouts}</p>
-                </div>
-            )}
-
-            {mostFrequentExercise && (
-                <div>
-                    <h2>Most Frequent Exercise</h2>
-                    <p>Exercise: {mostFrequentExercise[0].name}</p>
-                    <p>Count: {mostFrequentExercise[0].count_value}</p>
-                </div>
-            )}
-
-            {yearlyWorkoutCount && (
-                <div>
-                    <h2>Total Workouts in {(new Date().getFullYear())}</h2>
-                    <p>Total Workouts: {yearlyWorkoutCount[0].count}</p>
-                </div>
-            )}
-
-*/
