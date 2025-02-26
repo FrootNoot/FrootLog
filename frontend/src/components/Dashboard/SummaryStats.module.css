@@ -52,10 +52,8 @@
 
 }
 
-#recentWorkout{
-    flex-basis: 100%;
-    text-align: center;
-    margin-top: 50px;
+.recentWorkout{
+
 }
 
 
