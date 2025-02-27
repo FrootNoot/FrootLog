@@ -19,7 +19,7 @@ function DashboardTab({ tabNames, tabContents }) {
       </div>
       <div id={styles.spacer}></div>
       <div id={styles.test}>
-      <div className={styles.tabContent}>
+      <div className={`${styles.tabContent} ${activeTab === 2 ? styles.specialClass : ''}`}>
         {tabContents[activeTab]}
       </div>
       </div>
