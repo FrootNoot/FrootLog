@@ -50,15 +50,3 @@ function WorkoutItem({ workout }) {
 
 export default WorkoutItem;
 
-/*
-
-                {latestExercises && latestExercises.length > 0 && (
-                    latestExercises.map((exercise, index) => (
-                        <div key={index} className={styles.exerciseItem}>
-                            <p><strong>{exercise.name}</strong></p>
-                            <p>Sets: {exercise.sets}, Reps: {exercise.reps}, Weight: {exercise.weight}kg</p>
-                        </div>
-                    ))
-                )}
-            </div>
-*/

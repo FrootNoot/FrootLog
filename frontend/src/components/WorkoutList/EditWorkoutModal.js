@@ -60,8 +60,9 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
       {/* Inputs on the same row */}
       <div className={styles.inputRow}>
         <div>
-          <label>Bodyweight (kg):</label>
+          <label >Bodyweight (kg):</label>
           <input
+          id={styles.bodyWeightIn}
             type="number"
             name="bodyweight"
             value={workoutData.bodyweight}
