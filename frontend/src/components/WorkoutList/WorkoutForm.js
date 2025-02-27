@@ -82,6 +82,7 @@ const WorkoutForm = () => {
                 <h3>Exercises</h3>
                 {exercises.map((exercise, index) => (
                     <div className={styles.exerciseRow}key={index} style={{ position: 'relative' }}>
+                        <div className={styles.autoFill}> 
                         <input
                             type="text"
                             placeholder="Exercise Name"
@@ -99,6 +100,7 @@ const WorkoutForm = () => {
                                 ))}
                             </ul>
                         )}
+                        </div>
                         <input
                             type="number"
                             placeholder="Weight"

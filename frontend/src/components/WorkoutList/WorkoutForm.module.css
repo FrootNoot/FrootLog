@@ -3,18 +3,15 @@
 }
 
 .suggestions{
-    position:absolute;
-    top: 100%;
-    left: 0;
     background: white;
     border: 1px;
     list-style-type: none;
     padding: 5px;
-    margin: 0;
     z-index: 1;
-    /* height of remove button */
-    margin-top: -38px;
+    position: absolute;
+    margin-top: 30px;
 }
+
 
 
 
@@ -59,10 +56,9 @@
     justify-content: center;
     padding-left: auto;
     margin-top: 10px;
-    
 }
 
-.exerciseRow input{
+.exerciseRow > input{
     border: 0;
     border-bottom: 2px solid black;
     padding: 3px 0px 3px 5px;
@@ -71,6 +67,35 @@
     flex-basis: 40%;
     margin-bottom: 5px;
 }
+
+.autoFill{
+    display: flex;
+    flex-basis: 40%;
+    margin-right: 10px;
+}
+
+/*
+    border: 0;
+    border-bottom: 2px solid black;
+    height: 30px;
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 3px 0px 3px 5px;
+    margin-bottom: 5px;
+*/
+
+.autoFill input {
+    border: 0;
+
+    border-bottom: 2px solid black;
+    padding: 3px 0px 3px 5px;
+    height: 30px;
+    flex-grow: 1;
+    margin-bottom: 5px;
+    padding: 3px 0px 3px 5px;
+
+}
+
 
 .exerciseRow button{
     height: 30px;
