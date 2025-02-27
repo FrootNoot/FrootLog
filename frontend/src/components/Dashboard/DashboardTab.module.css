@@ -56,8 +56,9 @@
     padding: 20px;
     border-radius: 10px;
     background-color: #f9f9f9;
-    min-width: 400px;
-    max-width: 50vw;
+    min-width: max(420px, 50vw);
+    width: 50vw;
+    /* maybe do a max(for width)*/
     max-height: 75vh;
     /*can make pass overflow css uniquely from react instead.*/
     overflow-y: auto;
