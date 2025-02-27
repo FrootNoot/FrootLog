@@ -88,7 +88,7 @@ const WorkoutActivityGraph = ({ year }) => {
 
   return (
     <div>
-    <ResponsiveContainer className={styles.chartBackground} width={700} height={200}> {/* Added margin for left padding */}
+    <ResponsiveContainer className={styles.chartBackground} aspect={4} width="100%"  minWidth={750} minHeight={200}> {/* Added margin for left padding */}
       <ScatterChart>
         <XAxis className={styles.move}
           type="number"
@@ -125,6 +125,7 @@ const WorkoutActivityGraph = ({ year }) => {
           data={heatmapData}
           fill="#8884d8"
           shape={({ cx, cy, payload }) => (
+            
             <rect
               x={cx - 5}
               y={cy - 5}
@@ -148,7 +149,6 @@ const WorkoutActivityGraph = ({ year }) => {
   ) : (
     <div>
       <h2>Workout Details</h2>
-      {/* Make sure you're passing specific properties if necessary */}
       <ExerciseDisplay exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
     </div>
   )}
