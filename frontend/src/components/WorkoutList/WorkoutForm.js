@@ -66,7 +66,7 @@ const WorkoutForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.exerciseForm} onSubmit={handleSubmit}>
             <div className={styles.formHeader}>
                 <div>
                 <label className={styles.title}>Bodyweight:</label>
@@ -122,8 +122,8 @@ const WorkoutForm = () => {
                         <button type="button" onClick={() => handleRemoveExercise(index)}>Remove</button>
                     </div>
                 ))}
-                <button type="button" onClick={handleAddExercise}>Add Exercise</button>
             </div>
+            <button type="button" onClick={handleAddExercise}>Add Exercise</button>
 
             <button type="submit">Submit Workout</button>
         </form>

@@ -103,9 +103,26 @@
     flex-basis: 100%;
     width: 100px;
     margin-top: 10px;
+    cursor: pointer;
 }
 
-.exerciseRow input:nth-of-type(3){
-    
+.exerciseForm > button{
+    background-color: rgb(255, 187, 187);
+    font-size: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
 }
 
+.exerciseForm > button:nth-of-type(2){
+    background-color: rgb(164, 255, 164);
+    float: right;
+}
+
+.exerciseForm > button:hover{
+    background-color: rgb(255, 67, 67);
+}
+.exerciseForm > button:nth-of-type(2):hover{
+    background-color: rgb(43, 255, 43);
+}
