@@ -34,7 +34,7 @@ function WorkoutItem({ workout }) {
         </div>
       ))}
 
-      <button onClick={() => setIsModalOpen(true)}>Edit Workout</button>
+      <button onClick={() => setIsModalOpen(!isModalOpen)}>Edit Workout</button>
 
       {isModalOpen && (
         <EditWorkoutModal

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import styles from "./EditWorkoutModal.module.css";
 
 const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => {
   const [workoutData, setWorkoutData] = useState({
@@ -24,19 +25,13 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
   // Submit workout update
   const handleWorkoutUpdate = async () => {
     try {
-
       await axios.put(`http://localhost:5000/exercises/updateworkout/${workout.id}`, workoutData);
-      console.log("start")
-      console.log(exercises)
-    
+      
       await Promise.all(
         exerciseData.map((exercise) =>
-                  axios.put(`http://localhost:5000/exercises/updateExercise/${exercise.workoutexerciseid}`, exercise)
+          axios.put(`http://localhost:5000/exercises/updateExercise/${exercise.workoutexerciseid}`, exercise)
         )
       );
- 
-
-      console.log("end")
 
       refreshExercises(); // Refresh UI
       onClose();
@@ -48,7 +43,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
   // Delete Workout & Exercises
   const handleDeleteWorkout = async () => {
     if (!window.confirm("Are you sure you want to delete this workout?")) return;
-    
+
     try {
       await axios.delete(`http://localhost:5000/exercises/deleteWorkout/${workout.id}`);
       onClose();
@@ -59,28 +54,34 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
   };
 
   return (
-    <div className="modal">
+    <div className={styles.editModal}>
       <h2>Edit Workout</h2>
 
-      <label>Bodyweight (kg):</label>
-      <input
-        type="number"
-        name="bodyweight"
-        value={workoutData.bodyweight}
-        onChange={handleWorkoutChange}
-      />
-
-      <label>Date:</label>
-      <input
-        type="date"
-        name="date"
-        value={workoutData.date}
-        onChange={handleWorkoutChange}
-      />
+      {/* Inputs on the same row */}
+      <div className={styles.inputRow}>
+        <div>
+          <label>Bodyweight (kg):</label>
+          <input
+            type="number"
+            name="bodyweight"
+            value={workoutData.bodyweight}
+            onChange={handleWorkoutChange}
+          />
+        </div>
+        <div>
+          <label>Date:</label>
+          <input
+            type="date"
+            name="date"
+            value={workoutData.date}
+            onChange={handleWorkoutChange}
+          />
+        </div>
+      </div>
 
       <h3>Edit Exercises</h3>
       {exerciseData.map((exercise, index) => (
-        <div key={exercise.id}>
+        <div className={styles.exerciseRow} key={exercise.id}>
           <p>{exercise.name}</p>
           <label>Weight (kg):</label>
           <input
@@ -105,11 +106,11 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
         </div>
       ))}
 
-      <button onClick={handleWorkoutUpdate}>Save Changes</button>
-      <button onClick={handleDeleteWorkout} style={{ backgroundColor: "red" }}>
-        Delete Workout
-      </button>
-      <button onClick={onClose}>Cancel</button>
+      <div className={styles.buttonRow}>
+        <button onClick={handleWorkoutUpdate}>Save Changes</button>
+        <button onClick={handleDeleteWorkout}>Delete Workout</button>
+        <button onClick={onClose}>Cancel</button>
+      </div>
     </div>
   );
 };
