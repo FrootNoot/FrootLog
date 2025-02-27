@@ -87,7 +87,7 @@ const WorkoutForm = () => {
                             onFocus={(e) => handleChangeExercise(index, 'name', e.target.value)}
                         />
                         {suggestions[index] && suggestions[index].length > 0 && (
-                            <ul style={{position: 'absolute', top: '100%', left: 0, background: 'white', border: '1px solid #ccc', listStyleType: 'none', padding: '5px', margin: 0 }}>
+                            <ul className={styles.suggestions}>
                                 {suggestions[index].map((suggestion, i) => (
                                     <li key={i} onClick={() => handleSelectSuggestion(index, suggestion)} style={{ cursor: 'pointer', padding: '5px' }}>
                                         {suggestion}

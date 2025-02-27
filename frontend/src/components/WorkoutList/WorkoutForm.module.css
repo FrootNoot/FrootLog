@@ -1,3 +1,15 @@
 .title{
     color: var(--eerieblack);
 }
+
+.suggestions{
+    position:absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 1px;
+    list-style-type: none;
+    padding: 5px;
+    margin: 0;
+    z-index: 1;
+}
