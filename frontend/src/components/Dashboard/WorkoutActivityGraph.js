@@ -12,12 +12,13 @@ const isLeapYear = (year) => (year % 4 === 0 && year % 100 !== 0) || year % 400 
 
 // Function to generate full-year heatmap data
 const generateHeatmapData = (workoutData, year) => {
+
   const daysInYear = isLeapYear(year) ? 366 : 365;
   const startDate = new Date(`${year}-01-01`);
   
   let data = [];
   let currentDate = new Date(startDate);
-  
+
   while (data.length < daysInYear) {
     const dateString = currentDate.toISOString().split("T")[0]; // YYYY-MM-DD
     const dayOfWeek = currentDate.getDay(); // 0 = Sunday, 6 = Saturday
@@ -47,8 +48,14 @@ const generateHeatmapData = (workoutData, year) => {
 const WorkoutActivityGraph = ({ year }) => {
   const [workoutData, setWorkoutData] = useState([]);
   const [activeWorkout, setActiveWorkout] = useState(null);
+  const [width, setWidth] = useState(window.innerWidth);
 
-
+  useEffect(() => {
+    const handleResize = () => setWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  
   const handleClick = (payload) => {
     if (payload.count > 0) {
         axios.get(`http://localhost:5000/exercises/workoutByDate?date=${payload.date}`)
@@ -56,7 +63,14 @@ const WorkoutActivityGraph = ({ year }) => {
           .catch(error => console.error("Error fetching workout data:", error));
     }
   };
-
+  const minWidth = 1600;
+  const minSize = 10;  
+  const maxSize = 16; 
+  const growthFactor = 0.008;
+  
+  const rectSize = width >= minWidth 
+    ? Math.min(minSize + growthFactor * (width - minWidth), maxSize) 
+    : minSize;
 
 
   
@@ -88,6 +102,7 @@ const WorkoutActivityGraph = ({ year }) => {
 
   return (
     <div>
+
     <ResponsiveContainer className={styles.chartBackground} aspect={4} width="100%"  minWidth={750} minHeight={200}> {/* Added margin for left padding */}
       <ScatterChart>
         <XAxis className={styles.move}
@@ -129,8 +144,8 @@ const WorkoutActivityGraph = ({ year }) => {
             <rect
               x={cx - 5}
               y={cy - 5}
-              width={10}
-              height={10}
+              width={rectSize}
+              height={rectSize}
               fill={payload.count > 0 ? `rgba(255, 0, 0)` : "#eee"}
               rx={2}
               onClick={() => handleClick(payload)}
