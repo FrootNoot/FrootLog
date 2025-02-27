@@ -11,7 +11,7 @@ const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [enteredPassword, setEnteredPassword] = useState('');
 
-    const tabNames = ['Overview', 'Features', 'Pricing', 'Contact'];
+    const tabNames = ['Summary', 'Track', 'History', 'Contact'];
     const tabContents = [
         <SummaryStats/>,
         <WorkoutForm />,

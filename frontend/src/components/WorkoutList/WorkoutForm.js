@@ -3,10 +3,10 @@ import axios from 'axios';
 import styles from './WorkoutForm.module.css';
 
 const WorkoutForm = () => {
-    const [bodyweight, setbodyWeight] = useState('');
+    const [bodyweight, setBodyWeight] = useState('');
     const [date, setDate] = useState('');
     const [exercises, setExercises] = useState([{ name: '', weight: '', sets: '', reps: [] }]);
-    const [suggestions, setSuggestions] = useState([]);
+    const [suggestions, setSuggestions] = useState({}); // Store suggestions per row
 
     const handleAddExercise = () => {
         setExercises([...exercises, { name: '', weight: '', sets: '', reps: [] }]);
@@ -15,6 +15,12 @@ const WorkoutForm = () => {
     const handleRemoveExercise = (index) => {
         const newExercises = exercises.filter((_, i) => i !== index);
         setExercises(newExercises);
+
+        setSuggestions((prev) => {
+            const newSuggestions = { ...prev };
+            delete newSuggestions[index];
+            return newSuggestions;
+        });
     };
 
     const handleChangeExercise = async (index, field, value) => {
@@ -27,7 +33,7 @@ const WorkoutForm = () => {
                 const response = await axios.get('http://localhost:5000/exercises/search', {
                     params: { query: value },
                 });
-                setSuggestions(response.data);
+                setSuggestions((prev) => ({ ...prev, [index]: response.data }));
             } catch (error) {
                 console.error('Error fetching suggestions:', error);
             }
@@ -38,7 +44,7 @@ const WorkoutForm = () => {
         const newExercises = [...exercises];
         newExercises[index].name = suggestion;
         setExercises(newExercises);
-        setSuggestions([]);
+        setSuggestions((prev) => ({ ...prev, [index]: [] }));
     };
 
     const handleSubmit = async (e) => {
@@ -47,9 +53,10 @@ const WorkoutForm = () => {
         try {
             await axios.post('http://localhost:5000/exercises', workoutData);
             alert('Workout added successfully');
-            setbodyWeight('');
+            setBodyWeight('');
             setDate('');
             setExercises([{ name: '', weight: '', sets: '', reps: [] }]);
+            setSuggestions({}); // Reset suggestions
         } catch (error) {
             console.error('Error adding workout:', error);
             alert('Error adding workout');
@@ -59,8 +66,8 @@ const WorkoutForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label className={styles.title}>bodyweight:</label>
-                <input type="text" value={bodyweight} onChange={(e) => setbodyWeight(e.target.value)} />
+                <label className={styles.title}>Bodyweight:</label>
+                <input type="text" value={bodyweight} onChange={(e) => setBodyWeight(e.target.value)} />
             </div>
             <div>
                 <label>Date:</label>
@@ -76,12 +83,12 @@ const WorkoutForm = () => {
                             placeholder="Exercise Name"
                             value={exercise.name}
                             onChange={(e) => handleChangeExercise(index, 'name', e.target.value)}
-                            onBlur={() => setTimeout(() => setSuggestions([]), 100)} 
+                            onBlur={() => setTimeout(() => setSuggestions((prev) => ({ ...prev, [index]: [] })), 100)} 
                             onFocus={(e) => handleChangeExercise(index, 'name', e.target.value)}
                         />
-                        {suggestions.length > 0 && (
-                            <ul style={{ position: 'absolute', top: '100%', left: 0, background: 'white', border: '1px solid #ccc', listStyleType: 'none', padding: '5px', margin: 0 }}>
-                                {suggestions.map((suggestion, i) => (
+                        {suggestions[index] && suggestions[index].length > 0 && (
+                            <ul style={{position: 'absolute', top: '100%', left: 0, background: 'white', border: '1px solid #ccc', listStyleType: 'none', padding: '5px', margin: 0 }}>
+                                {suggestions[index].map((suggestion, i) => (
                                     <li key={i} onClick={() => handleSelectSuggestion(index, suggestion)} style={{ cursor: 'pointer', padding: '5px' }}>
                                         {suggestion}
                                     </li>
@@ -103,7 +110,7 @@ const WorkoutForm = () => {
                         <input
                             type="text"
                             placeholder="Reps (comma-separated)"
-                            value={exercise.reps}
+                            value={exercise.reps.join(',')}
                             onChange={(e) => handleChangeExercise(index, 'reps', e.target.value.split(','))}
                         />
                         <button type="button" onClick={() => handleRemoveExercise(index)}>Remove</button>
