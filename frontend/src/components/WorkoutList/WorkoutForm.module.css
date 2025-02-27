@@ -16,6 +16,8 @@
     margin-top: -38px;
 }
 
+
+
 .formHeader{
     display: flex;
     width: 100%;
@@ -28,8 +30,7 @@
 }
 
 .formHeader div > input{
-    background-color: black;
-    color: white;
+    color: black;
     padding: 3px;
     width: 50px;
     outline: none;
@@ -45,5 +46,41 @@
 
 .formHeader div:nth-child(2) input{
     width: 125px;
+
+}
+
+.exerciseRow{
+    background-color: rgb(255, 222, 222);
+    border: 5px solid black;
+    margin-bottom: 20px;
+    padding: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-left: auto;
+    margin-top: 10px;
+    
+}
+
+.exerciseRow input{
+    border: 0;
+    border-bottom: 2px solid black;
+    padding: 3px 0px 3px 5px;
+    margin-right: 10px;
+    height: 30px;
+    flex-basis: 40%;
+    margin-bottom: 5px;
+}
+
+.exerciseRow button{
+    height: 30px;
+    font-size: 15px;
+    flex-basis: 100%;
+    width: 100px;
+    margin-top: 10px;
+}
+
+.exerciseRow input:nth-of-type(3){
+    
 }
 

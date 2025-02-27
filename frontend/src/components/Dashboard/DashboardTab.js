@@ -18,9 +18,10 @@ function DashboardTab({ tabNames, tabContents }) {
         ))}
       </div>
       <div id={styles.spacer}></div>
-
+      <div id={styles.test}>
       <div className={styles.tabContent}>
         {tabContents[activeTab]}
+      </div>
       </div>
     </div>
   );

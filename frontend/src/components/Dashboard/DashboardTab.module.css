@@ -58,6 +58,11 @@
     background-color: #f9f9f9;
     min-width: 400px;
     max-width: 50vw;
+    max-height: 75vh;
+    /*can make pass overflow css uniquely from react instead.*/
+    overflow-y: auto;
+    overflow-x: hidden
+
 }
 
 
@@ -85,6 +90,10 @@
         justify-content: flex-start;
         height: 100%;
         margin-top: 100px;
+    }
+
+    .tabContent{
+        max-height: none;
     }
 
     .tabButtons button:first-child {

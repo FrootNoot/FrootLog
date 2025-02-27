@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import styles from './WorkoutForm.module.css';
 
@@ -7,6 +7,8 @@ const WorkoutForm = () => {
     const [date, setDate] = useState('');
     const [exercises, setExercises] = useState([{ name: '', weight: '', sets: '', reps: [] }]);
     const [suggestions, setSuggestions] = useState({}); // Store suggestions per row
+
+
 
     const handleAddExercise = () => {
         setExercises([...exercises, { name: '', weight: '', sets: '', reps: [] }]);
@@ -79,7 +81,7 @@ const WorkoutForm = () => {
             <div>
                 <h3>Exercises</h3>
                 {exercises.map((exercise, index) => (
-                    <div key={index} style={{ position: 'relative' }}>
+                    <div className={styles.exerciseRow}key={index} style={{ position: 'relative' }}>
                         <input
                             type="text"
                             placeholder="Exercise Name"
