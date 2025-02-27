@@ -65,9 +65,8 @@
 @media screen and (max-width: 768px) {
     .tabButtons {
       flex-direction: row;
-      position: absolute;
+      position: relative;
       left: auto;
-      top: 10%;    
       flex-wrap: wrap;
       max-width: 70vw;
       
@@ -83,7 +82,9 @@
     }
     .tabsContainer{
         flex-direction: column;
+        justify-content: flex-start;
         height: 100%;
+        margin-top: 100px;
     }
 
     .tabButtons button:first-child {
