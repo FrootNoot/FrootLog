@@ -65,13 +65,15 @@ const WorkoutForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <div>
+            <div className={styles.formHeader}>
+                <div>
                 <label className={styles.title}>Bodyweight:</label>
                 <input type="text" value={bodyweight} onChange={(e) => setBodyWeight(e.target.value)} />
-            </div>
+                </div>
             <div>
                 <label>Date:</label>
                 <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                </div>
             </div>
 
             <div>
