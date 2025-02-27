@@ -163,7 +163,6 @@ const WorkoutActivityGraph = ({ year }) => {
     </div>
   ) : (
     <div>
-      <h2>Workout Details</h2>
       <ExerciseDisplay exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
     </div>
   )}

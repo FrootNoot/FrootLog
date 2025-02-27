@@ -24,18 +24,15 @@ function WorkoutItem({ workout }) {
   }, [fetchExercises]);
 
   return (
-    <li>
-      <span>Workout ID: {workout.id} </span>
-      <span>Bodyweight: {workout.bodyweight}kgs </span>
-      <span>Date: {workout.date} </span>
+    <div>
+      <h2>Workout on {workout.date}</h2>
 
-      <ul>
-        {exercises.map((exercise) => (
-          <li key={exercise.id}>
-            {exercise.name} - {exercise.weight}kg, {exercise.sets} sets, Reps: {exercise.reps.join(', ')}
-          </li>
-        ))}
-      </ul>
+      {exercises.map((exercise, index) => (
+        <div key={index} className={styles.exerciseItem}>
+            <p><strong>{exercise.name}</strong></p>
+            <p>Sets: {exercise.sets}, Reps: {exercise.reps}, Weight: {exercise.weight}kg</p>
+        </div>
+      ))}
 
       <button onClick={() => setIsModalOpen(true)}>Edit Workout</button>
 
@@ -47,8 +44,21 @@ function WorkoutItem({ workout }) {
           refreshExercises={fetchExercises} // Refresh exercises after editing
         />
       )}
-    </li>
+    </div>
   );
 }
 
 export default WorkoutItem;
+
+/*
+
+                {latestExercises && latestExercises.length > 0 && (
+                    latestExercises.map((exercise, index) => (
+                        <div key={index} className={styles.exerciseItem}>
+                            <p><strong>{exercise.name}</strong></p>
+                            <p>Sets: {exercise.sets}, Reps: {exercise.reps}, Weight: {exercise.weight}kg</p>
+                        </div>
+                    ))
+                )}
+            </div>
+*/
