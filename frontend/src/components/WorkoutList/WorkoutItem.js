@@ -30,7 +30,7 @@ function WorkoutItem({ workout }) {
       {exercises.map((exercise, index) => (
         <div key={index} className={styles.exerciseItem}>
             <p><strong>{exercise.name}</strong></p>
-            <p>Sets: {exercise.sets}, Reps: {exercise.reps}, Weight: {exercise.weight}kg</p>
+            <p>Sets: {exercise.sets}, Reps: {exercise.reps.join(", ")} Weight: {exercise.weight}kg</p>
         </div>
       ))}
 
