@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+
 .app{
   display:flex;
   flex-direction: column;
   width: 100%;
 }
+
+* {
+  font-family: "rubik", sans-serif;
+  font-optical-sizing: auto; 
+}
+
 
 :root {
   --seasalt: #F8F9FA;
