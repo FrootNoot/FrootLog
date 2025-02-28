@@ -37,10 +37,10 @@ const MorphingBackground = () => {
       >
         <rect x="0" y="0" width="100%" height="100%" fill="#ffffff"></rect>
         <g transform="translate(900, 0)">
-          <path id="path1" fill="#000000" d={firstPath1}></path>
+          <path id="path1" fill="#101415" d={firstPath1}></path>
         </g>
         <g transform="translate(0, 600)">
-          <path id="path2" fill="#000000" d={firstPath2}></path>
+          <path id="path2" fill="#101415" d={firstPath2}></path>
         </g>
       </svg>
     </div>
