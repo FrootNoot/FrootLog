@@ -84,18 +84,23 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
       {exerciseData.map((exercise, index) => (
         <div className={styles.exerciseRow} key={exercise.id}>
           <p>{exercise.name}</p>
+          <div> 
           <label>Weight (kg):</label>
           <input
             type="number"
             value={exercise.weight}
             onChange={(e) => handleExerciseChange(index, "weight", e.target.value)}
           />
+          </div>
+          <div>
           <label>Sets:</label>
           <input
             type="number"
             value={exercise.sets}
             onChange={(e) => handleExerciseChange(index, "sets", e.target.value)}
           />
+          </div>
+          <div>
           <label>Reps:</label>
           <input
             type="text"
@@ -104,6 +109,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
               handleExerciseChange(index, "reps", e.target.value.split(",").map(Number))
             }
           />
+          </div>
         </div>
       ))}
 
