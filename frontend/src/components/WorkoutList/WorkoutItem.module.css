@@ -1,0 +1,11 @@
+.buttonActive{
+    visibility: show;
+    display: block;
+    position: relative;
+}
+
+.buttonInactive{
+    position: absolute;
+    visibility: hidden;
+}
+

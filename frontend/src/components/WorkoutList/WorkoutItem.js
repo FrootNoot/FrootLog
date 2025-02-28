@@ -23,8 +23,10 @@ function WorkoutItem({ workout }) {
     fetchExercises();
   }, [fetchExercises]);
 
+
+  const buttonClass = !isModalOpen ? styles.buttonActive : styles.buttonInactive;
   return (
-    <div>
+    <div className={styles.workoutItem}>
       <h2>Workout on {workout.date}</h2>
 
       {exercises.map((exercise, index) => (
@@ -34,13 +36,13 @@ function WorkoutItem({ workout }) {
         </div>
       ))}
 
-      <button onClick={() => setIsModalOpen(!isModalOpen)}>Edit Workout</button>
+      <button className={buttonClass} onClick={() => setIsModalOpen(!isModalOpen)}>Edit Workout</button>
 
       {isModalOpen && (
         <EditWorkoutModal
           workout={workout}
           exercises={exercises}
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => setIsModalOpen(false) }
           refreshExercises={fetchExercises} // Refresh exercises after editing
         />
       )}
