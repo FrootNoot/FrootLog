@@ -10,9 +10,7 @@ function Footer() {
         <li><a href="">Email</a></li>
         <li><a href="">Dribbble</a></li>
         <li><a href="">Github</a></li>
-        <li>
-          <p>👋</p>
-        </li>
+
       </ul>
     </div>
   );
