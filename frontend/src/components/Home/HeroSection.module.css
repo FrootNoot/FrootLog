@@ -1,34 +1,29 @@
 #mainParent {
   color: rgb(0, 0, 0);
-  background-color: red;
+  background-color: rgb(245, 215, 215);
   width: 100%;
+
+  /* height of nav bar*/
   margin-top: 60px;
-  height: 60vh;
+  height: calc(100vh - 60px);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-left: 10%;
-  padding-right: 10%;
-  gap:50px;
+  border-top: 4px solid white;
 }
 
-#imgPlaceholder{
-  width: 60vw;
-  height: 30vh;
-  background-color: pink;
-  float: right;
+.halfContainer{
+  width: 50%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-left: 80px;
 }
 
-#introContainer{
-  display:flex;
-  align-items: center;
-  background-color: white;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  padding-left: 20px;
-  margin-left: -20px;
+#firstHalf{
+  background-color: rgb(127, 215, 127);
+  border-right: 2px solid white;
+}
+
+#secondHalf{
+  background-color: rgb(236, 158, 158);
+  border-left: 2px solid white;
 }

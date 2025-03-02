@@ -5,14 +5,15 @@ function HeroSection() {
 
   return (
     <div id={styles.mainParent}>
-      <h1>FROOTNOOT.FIT</h1>
-      <div id={styles.introContainer}>
-        <div id={styles.introText}>
-          <h1>check my progress</h1>
-          <p>wagabaga wagabaga wagabaga </p>
-        </div>
-        <div id={styles.imgPlaceholder}> image place holder </div>
+
+      <div id={styles.firstHalf} className={styles.halfContainer}>
+        <h1>first half</h1>
       </div>
+
+      <div id={styles.secondHalf} className={styles.halfContainer}>
+        <h1>second half</h1>
+      </div>
+
     </div>
   );
 }
