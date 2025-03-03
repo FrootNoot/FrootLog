@@ -8,6 +8,7 @@
   height: calc(100vh - 60px);
   display: flex;
   border-top: 4px solid white;
+  border: 5px solid white;
 }
 
 .halfContainer{
@@ -21,9 +22,38 @@
 #firstHalf{
   background-color: rgb(127, 215, 127);
   border-right: 2px solid white;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 10%;
+  
 }
 
 #secondHalf{
   background-color: rgb(236, 158, 158);
   border-left: 2px solid white;
+}
+
+.pulse {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  filter: blur(0.6rem);
+  animation: animate-pulse 1s linear infinite;
+  background: linear-gradient(90deg, #ff6419 0%, #fa6b3e 36.98%, #ef7a93 74.48%, #eb80b5 100%);
+}
+
+
+@keyframes animate-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 109, 74, 0.7), 0 0 0 0 rgba(255, 109, 74, 0.7);
+  }
+  40% {
+    box-shadow: 0 0 0 3.125rem rgba(255, 109, 74, 0), 0 0 0 0 rgba(255, 109, 74, 0.7);
+  }
+  80% {
+    box-shadow: 0 0 0 3.125rem rgba(255, 109, 74, 0), 0 0 0 1.875rem rgba(255, 109, 74, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 109, 74, 0), 0 0 0 1.875rem rgba(255, 109, 74, 0);
+  }
 }

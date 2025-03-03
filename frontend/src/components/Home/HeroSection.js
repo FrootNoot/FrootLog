@@ -7,11 +7,13 @@ function HeroSection() {
     <div id={styles.mainParent}>
 
       <div id={styles.firstHalf} className={styles.halfContainer}>
-        <h1>first half</h1>
+        <h1>frootnoot.fit</h1>
+        <h2>my personal gym tracker</h2>
       </div>
 
       <div id={styles.secondHalf} className={styles.halfContainer}>
-        <h1>second half</h1>
+          <div className={styles.pulse}>
+        </div>
       </div>
 
     </div>
