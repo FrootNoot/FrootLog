@@ -13,7 +13,9 @@
 }
 
 .mainArea{
-  background:linear-gradient(to left, #ffdcdc, #fff0f0);
+  /*   background:linear-gradient(to left, #ffdcdc, #db0303); 
+       background:linear-gradient(to left, #140e0e, #221e1e); */
+  background: #f9f1f1;
   width: 50%;
   height: 60vh;
   
@@ -21,8 +23,8 @@
 }
 
 
-.RmainArea {
-  background:linear-gradient(to left, #140e0e, #221e1e);
+.RmainArea { 
+  background: #221e1e;
   width: 50%;
   height: 60vh;
 }
