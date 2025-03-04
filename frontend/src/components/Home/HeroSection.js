@@ -4,9 +4,9 @@ import styles from "./HeroSection.module.css";
 function HeroSection() {
 
   const pulses = [
-    { id: 1, color: "linear-gradient(90deg, #ff6419, #fa6b3e, #ef7a93)", animation: "animate-pulse-1" },
-    { id: 2, color: "linear-gradient(90deg,rgb(0, 0, 0), #4a90e2, #00d2ff)", animation: "animate-pulse-2" },
-    { id: 3, color: "linear-gradient(90deg, #4caf50, #66bb6a, #81c784)", animation: "animate-pulse-3" },
+    { id: 1, color: "linear-gradient(90deg, #F5BEBE, #fa6b3e, #FF4848)", animation: "animate-pulse-1" },
+    { id: 2, color: "linear-gradient(90deg, #F3E2E2, #E39CFF,rgb(255, 56, 228)", animation: "animate-pulse-2" },
+    { id: 3, color: "linear-gradient(90deg, #F3E2E2, #7AADF1,rgb(0, 13, 255))", animation: "animate-pulse-3" },
   ];
 
   return (
