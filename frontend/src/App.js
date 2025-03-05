@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import TodoList from './components/Todo/TodoList';
-import TodoForm from './components/Todo/TodoForm';
 import HeroSection from './components/Home/HeroSection';
 import BodyButtons from './components/Home/BodyButtons';
 import Footer from './components/Home/Footer'; 
+import Divider from './components/Home/Divider';
 
 import Navbar from './components/Navbar/Navbar';
 import styles from './App.module.css';
@@ -69,6 +68,7 @@ function App() {
     <div className={styles.app}>
       <Navbar></Navbar>
       <HeroSection></HeroSection>
+      <Divider></Divider>
       <BodyButtons></BodyButtons>
       <Footer></Footer>
 

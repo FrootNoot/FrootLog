@@ -1,13 +1,13 @@
 #mainParent {
   color: rgb(0, 0, 0);
-  background-color: rgb(245, 215, 215);
   width: 100%;
 
   /* height of nav bar*/
   margin-top: 60px;
   height: calc(100vh - 60px);
   display: flex;
-  border-top: 4px solid white;
+  letter-spacing: 4px;
+
 }
 
 .halfContainer{
@@ -20,7 +20,7 @@
 
 #firstHalf{
   background-color: #221e1e;
-  border-right: 2px solid white;
+  border-right: 1px solid white;
   flex-direction: column;
   align-items: flex-start;
   padding-left: 10%;
@@ -35,6 +35,7 @@
 #secondHalf{
   background-color: 	#f9f1f1;
   border-left: 2px solid white;
+
 }
 
 .pulse {
@@ -147,25 +148,27 @@
   #firstHalf{
     background-color: #f9f1f1;
     border-right:none;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 10%;
+    
+    flex-basis: 100%;
   }
 
   #firstHalf  *{
     z-index: 2;
     color: black;
+
   }
+
+  #mainParent {
+    align-items: flex-end;
+  }
+  
+
 
   #secondHalf{
     border-left:none;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 10%;
   }
 
-  .pulse{
+  
 
-  }
 
 }

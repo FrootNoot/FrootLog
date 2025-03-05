@@ -5,11 +5,10 @@ function Footer() {
   return (
     <div className={styles.footer}>
       <ul>
-        <li><a href="">Twitter</a></li>
-        <li><a href="">Codepen</a></li>
-        <li><a href="">Email</a></li>
-        <li><a href="">Dribbble</a></li>
         <li><a href="">Github</a></li>
+        <li><a href="">LinkedIn</a></li>
+        <li><a href="">Email</a></li>
+
 
       </ul>
     </div>
