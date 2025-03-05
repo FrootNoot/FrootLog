@@ -89,12 +89,15 @@ const SummaryStats = () => {
                     <h2>Latest Workout on {latestWorkout[0].date}</h2>
                 )}
                 {latestExercises && latestExercises.length > 0 && (
-                    latestExercises.map((exercise, index) => (
-                        <div key={index} className={styles.exerciseItem}>
-                            <p><strong>{exercise.name}</strong></p>
-                            <p>Sets: {exercise.sets}, Reps: {exercise.reps.join(', ')} Weight: {exercise.weight}kg</p>
-                        </div>
-                    ))
+                latestExercises.map((exercise, index) => (
+                    <div key={index} className={styles.exerciseItem}>
+                        <p className={styles.exerciseName}>{exercise.name}</p>
+                        <p>Sets: {exercise.sets}</p>
+                        <p>Reps: {exercise.reps.join(', ')}</p>
+                        <p>Weight: {exercise.weight}kg</p>
+                    </div>
+                ))
+
                 )}
             </div>
         </div>

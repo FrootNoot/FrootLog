@@ -8,12 +8,15 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
-
-
 }
 
 .buttonInactive{
     position: absolute;
     visibility: hidden;
 }
+
+.workoutItem{
+    color: white;
+}
+
 
