@@ -103,12 +103,14 @@ const WorkoutActivityGraph = ({ year }) => {
   return (
     <div>
 
-    <ResponsiveContainer className={styles.chartBackground} aspect={4} width="100%"  minWidth={750} minHeight={200}> {/* Added margin for left padding */}
+    <ResponsiveContainer className={styles.chartBackground} aspect={4} width="100%"  minWidth={750} minHeight={220}> {/* Added margin for left padding */}
       <ScatterChart>
         <XAxis className={styles.move}
           type="number"
+          stroke="#ffffff"
           dataKey="x"
           name="Week"
+          dy={10}
           dx={30}
           axisLine={false}
           domain={[0, 53]} 
@@ -126,7 +128,9 @@ const WorkoutActivityGraph = ({ year }) => {
           className={styles.move2}
           type="number"
           dataKey="y"
+          stroke="#ffffff"
           name="Day"
+
           axisLine={false}
           ticks={[1,3,5]}
           domain={[0, 6]}
@@ -135,7 +139,6 @@ const WorkoutActivityGraph = ({ year }) => {
             return daysOfWeek[value];
           }}
         />
-        <Tooltip cursor={{ strokeDasharray: "3 3" }} />
         <Scatter
           data={heatmapData}
           fill="#8884d8"
@@ -146,7 +149,7 @@ const WorkoutActivityGraph = ({ year }) => {
               y={cy - 5}
               width={rectSize}
               height={rectSize}
-              fill={payload.count > 0 ? `rgba(255, 0, 0)` : "#eee"}
+              fill={payload.count > 0 ? `rgba(119, 255, 98, 0.8)` : "#eee"}
               rx={2}
               onClick={() => handleClick(payload)}
               style={{ cursor: payload.count > 0 ? 'pointer' : 'default' }}
@@ -158,7 +161,7 @@ const WorkoutActivityGraph = ({ year }) => {
 
     <div>
   {!activeWorkout ? (
-    <div>
+    <div id={styles.hint}>
       "Click on a workout to view details"
     </div>
   ) : (

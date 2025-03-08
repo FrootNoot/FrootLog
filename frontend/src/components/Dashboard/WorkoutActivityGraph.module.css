@@ -1,9 +1,15 @@
 .move {
     font-size: 20px;
+    
   }
 
   .move2 {
     font-size: 20px;
-    font-style: italic;
+
   }
 
+
+#hint{
+  color: white;
+  margin-top: 20px;
+}
