@@ -8,6 +8,14 @@
     font-weight: bold;
     cursor: pointer;
     margin-top: 10px;
+    border: 1px solid rgb(255, 255, 255);
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+}
+
+
+.buttonActive:hover{
+    background-color: green;
 }
 
 .buttonInactive{
@@ -19,4 +27,32 @@
     color: white;
 }
 
+.exerciseItem{
+    border-bottom: 2px white solid;
+    padding: 10px;
+}
+
+
+.exerciseItem:first-of-type{
+    border-top: 2px white solid;
+}
+
+.exerciseItem:last-of-type{
+}
+
+.exerciseItem {
+    display: grid;
+    grid-template-columns: 0.6fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 5px; 
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 2px solid white;
+}
+
+.exerciseName {
+    grid-column: 1 / -1;
+    font-weight: bold;
+    text-align: left;
+}
 

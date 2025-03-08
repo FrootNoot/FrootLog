@@ -57,13 +57,12 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
     <div className={styles.editModal}>
       <h2>Edit Workout</h2>
 
-      {/* Inputs on the same row */}
       <div className={styles.inputRow}>
         <div>
-          <label >Bodyweight (kg):</label>
+          <label >Bodyweight:</label>
           <input
           id={styles.bodyWeightIn}
-            type="number"
+            type="text"
             name="bodyweight"
             value={workoutData.bodyweight}
             onChange={handleWorkoutChange}

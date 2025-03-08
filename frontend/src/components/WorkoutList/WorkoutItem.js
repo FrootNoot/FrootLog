@@ -29,13 +29,14 @@ function WorkoutItem({ workout }) {
     <div className={styles.workoutItem}>
       <h2>Workout on {workout.date}</h2>
 
-      {exercises.map((exercise, index) => (
+      { exercises.map((exercise, index) => (
         <div key={index} className={styles.exerciseItem}>
-            <p><strong>{exercise.name}</strong></p>
-            <p>Sets: {exercise.sets}, Reps: {exercise.reps.join(", ")} Weight: {exercise.weight}kg</p>
-        </div>
-      ))}
-
+          <p className={styles.exerciseName}>{exercise.name}</p>
+          <p>Sets: {exercise.sets}</p>
+          <p>Reps: {exercise.reps.join(', ')}</p>
+          <p>Weight: {exercise.weight}kg</p>
+        </div>))
+        }
       <button className={buttonClass} onClick={() => setIsModalOpen(!isModalOpen)}>Edit Workout</button>
 
       {isModalOpen && (
