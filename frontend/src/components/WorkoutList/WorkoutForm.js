@@ -107,7 +107,7 @@ const WorkoutForm = () => {
             <div className={styles.formHeader}>
                 <div>
                 <label className={styles.title}>Bodyweight:</label>
-                <input min="1" max="999"required type="number" value={bodyweight} onChange={(e) => setBodyWeight(e.target.value)} />
+                <input min="1" max="999" required type="number" value={bodyweight} onChange={(e) => setBodyWeight(e.target.value)} />
                 </div>
             <div>
                 <label>Date:</label>
@@ -154,6 +154,8 @@ const WorkoutForm = () => {
                             placeholder="Sets"
                             value={exercise.sets}
                             onChange={(e) => handleChangeExercise(index, 'sets', e.target.value)}
+                            min="1"
+                            max="999"
                             required
                         />
                         <input

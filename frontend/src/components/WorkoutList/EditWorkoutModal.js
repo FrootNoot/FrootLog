@@ -3,6 +3,8 @@ import axios from "axios";
 import styles from "./EditWorkoutModal.module.css";
 
 const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => {
+  const today = new Date().toISOString().split('T')[0];
+
   const [workoutData, setWorkoutData] = useState({
     bodyweight: workout.bodyweight,
     date: workout.date.split("T")[0], // Format date for input
@@ -24,6 +26,27 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
 
   // Submit workout update
   const handleWorkoutUpdate = async () => {
+
+    const validationErrors = [];
+
+
+    exerciseData.forEach((exercise, index) => {
+      const sets = Number(exercise.sets);
+      const reps = exercise.reps.length;
+
+      if (sets && reps && sets !== reps) {
+          validationErrors.push(
+              `The number of reps (${reps}) does not match the number of sets (${sets}) for exercise: ${exercise.name}.`
+          );
+      }
+    });
+
+    if (validationErrors.length > 0) {
+      alert(validationErrors.join('\n')); 
+      return;
+  }
+
+
     try {
       await axios.put(`http://localhost:5000/exercises/updateworkout/${workout.id}`, workoutData);
       
@@ -54,6 +77,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
   };
 
   return (
+    
     <div className={styles.editModal}>
       <h2>Edit Workout</h2>
 
@@ -62,10 +86,12 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
           <label >Bodyweight:</label>
           <input
           id={styles.bodyWeightIn}
-            type="text"
+            type="number"
             name="bodyweight"
             value={workoutData.bodyweight}
             onChange={handleWorkoutChange}
+            min="1" max="999"
+            required
           />
         </div>
         <div>
@@ -75,6 +101,8 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
             name="date"
             value={workoutData.date}
             onChange={handleWorkoutChange}
+            required
+            max={today}
           />
         </div>
       </div>
@@ -89,6 +117,9 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
             type="number"
             value={exercise.weight}
             onChange={(e) => handleExerciseChange(index, "weight", e.target.value)}
+            min="1"
+            max="999"
+            required
           />
           </div>
           <div>
@@ -97,6 +128,8 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
             type="number"
             value={exercise.sets}
             onChange={(e) => handleExerciseChange(index, "sets", e.target.value)}
+            min="1"
+            max="999"
           />
           </div>
           <div>
@@ -105,15 +138,18 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
             type="text"
             value={exercise.reps.join(",")}
             onChange={(e) =>
-              handleExerciseChange(index, "reps", e.target.value.split(",").map(Number))
+              handleExerciseChange(index, "reps", e.target.value.split(","))
             }
+            pattern="^(\d+)(,\d+)*$"
+            required
+            title="Reps must match sets and be comma-seperated e.g. (7,7,8)"
           />
           </div>
         </div>
       ))}
 
       <div className={styles.buttonRow}>
-        <button onClick={handleWorkoutUpdate}>Save Changes</button>
+        <button type="submit" onClick={handleWorkoutUpdate}>Save Changes</button>
         <button onClick={handleDeleteWorkout}>Delete Workout</button>
         <button onClick={onClose}>Cancel</button>
       </div>
