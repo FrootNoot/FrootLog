@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./EditWorkoutModal.module.css";
 
@@ -25,8 +25,8 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
   };
 
   // Submit workout update
-  const handleWorkoutUpdate = async () => {
-
+  const handleWorkoutUpdate = async (e) => {
+    e.preventDefault()
     const validationErrors = [];
 
 
@@ -77,8 +77,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
   };
 
   return (
-    
-    <div className={styles.editModal}>
+    <form className={styles.editModal} onSubmit={handleWorkoutUpdate}>
       <h2>Edit Workout</h2>
 
       <div className={styles.inputRow}>
@@ -91,6 +90,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
             value={workoutData.bodyweight}
             onChange={handleWorkoutChange}
             min="1" max="999"
+            step=".01"
             required
           />
         </div>
@@ -119,6 +119,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
             onChange={(e) => handleExerciseChange(index, "weight", e.target.value)}
             min="1"
             max="999"
+            step=".01"
             required
           />
           </div>
@@ -149,11 +150,11 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
       ))}
 
       <div className={styles.buttonRow}>
-        <button type="submit" onClick={handleWorkoutUpdate}>Save Changes</button>
+        <button type="submit">Save Changes</button>
         <button onClick={handleDeleteWorkout}>Delete Workout</button>
         <button onClick={onClose}>Cancel</button>
       </div>
-    </div>
+    </form>
   );
 };
 

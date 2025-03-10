@@ -107,7 +107,7 @@ const WorkoutForm = () => {
             <div className={styles.formHeader}>
                 <div>
                 <label className={styles.title}>Bodyweight:</label>
-                <input min="1" max="999" required type="number" value={bodyweight} onChange={(e) => setBodyWeight(e.target.value)} />
+                <input step=".01" min="1" max="999" required type="number" value={bodyweight} onChange={(e) => setBodyWeight(e.target.value)} />
                 </div>
             <div>
                 <label>Date:</label>
@@ -146,7 +146,7 @@ const WorkoutForm = () => {
                             onChange={(e) => handleChangeExercise(index, 'weight', e.target.value)}
                             min="1"
                             max="999"
-                            
+                            step=".01"
                             required
                         />
                         <input
