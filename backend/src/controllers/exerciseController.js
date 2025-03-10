@@ -50,7 +50,7 @@ exports.addWorkout = async (req, res) => {
   try {
     const result = await db.query(
       'INSERT INTO workouts (bodyweight, date) VALUES ($1, $2) RETURNING id',
-      [bodyweight, date]  // Ensure `date` is just a date in "YYYY-MM-DD" format
+      [bodyweight, date] 
     );
     const workoutId = result.rows[0].id;
 

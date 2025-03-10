@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import HeroSection from './components/Home/HeroSection';
 import BodyButtons from './components/Home/BodyButtons';
 import Footer from './components/Home/Footer'; 
@@ -7,62 +6,9 @@ import Divider from './components/Home/Divider';
 
 import Navbar from './components/Navbar/Navbar';
 import styles from './App.module.css';
-import {Link} from 'react-router-dom'
 
 
 function App() {
-  const [todos, setTodos] = useState([]);
-
-  const fetchTodos = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/todo'); 
-      setTodos(response.data);
-    } catch (error) {
-      console.error('Error fetching todos: ', error);
-    }
-  };
-
-  const addTodo = async (text, text2) => {
-    try {
-      const newTodo = { text, text2, completed: false };
-      const response = await axios.post('http://localhost:5000/todo', newTodo); 
-      setTodos([...todos, response.data]);
-    } catch (error) {
-      console.error('Error adding todo:', error);
-    }
-  };
-
-  const toggleComplete = async (id) => {
-    try {
-      const todoToUpdate = todos.find((todo) => todo.id === id);
-      if (!todoToUpdate) return;
-  
-      const updatedTodo = {
-        ...todoToUpdate, 
-        completed: !todoToUpdate.completed, 
-      };
-  
-      await axios.put(`http://localhost:5000/todo/completed/${id}`, updatedTodo);
-  
-      setTodos(todos.map((todo) => (todo.id === id ? updatedTodo : todo)));
-    } catch (error) {
-      console.error('Error toggling todo completion:', error);
-    }
-  };
-  
-
-  const deleteTodo = async (id) => {
-    try {
-      await axios.delete(`http://localhost:5000/todo/${id}`); 
-      setTodos(todos.filter((todo) => todo.id !== id));
-    } catch (error) {
-      console.error('Error deleting todo:', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchTodos();
-  }, []);
 
   return (
     <div className={styles.app}>
