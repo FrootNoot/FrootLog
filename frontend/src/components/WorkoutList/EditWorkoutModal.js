@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./EditWorkoutModal.module.css";
 
-const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => {
+const EditWorkoutModal = ({ workout, exercises, onClose}) => {
   const today = new Date().toISOString().split('T')[0];
 
   const [workoutData, setWorkoutData] = useState({
@@ -56,7 +56,6 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
         )
       );
 
-      refreshExercises(); // Refresh UI
       onClose();
     } catch (error) {
       console.error("Failed to update workout:", error);
@@ -70,7 +69,6 @@ const EditWorkoutModal = ({ workout, exercises, onClose, refreshExercises }) => 
     try {
       await axios.delete(`http://localhost:5000/exercises/deleteWorkout/${workout.id}`);
       onClose();
-      refreshExercises();
     } catch (error) {
       console.error("Failed to delete workout:", error);
     }

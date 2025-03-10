@@ -49,7 +49,6 @@ function WorkoutItem({ workout }) {
           workout={workout}
           exercises={exercises}
           onClose={refresh}
-          refreshExercises={fetchExercises} 
         />
       )}
     </div>
