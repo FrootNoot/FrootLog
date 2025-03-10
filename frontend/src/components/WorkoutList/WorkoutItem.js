@@ -23,6 +23,11 @@ function WorkoutItem({ workout }) {
     fetchExercises();
   }, [fetchExercises]);
 
+  const refresh = async () =>{
+    setIsModalOpen(false)
+    fetchExercises()
+  }
+
 
   const buttonClass = !isModalOpen ? styles.buttonActive : styles.buttonInactive;
   return (
@@ -43,8 +48,8 @@ function WorkoutItem({ workout }) {
         <EditWorkoutModal
           workout={workout}
           exercises={exercises}
-          onClose={() => setIsModalOpen(false) }
-          refreshExercises={fetchExercises} // Refresh exercises after editing
+          onClose={refresh}
+          refreshExercises={fetchExercises} 
         />
       )}
     </div>
