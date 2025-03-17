@@ -188,7 +188,6 @@
   #firstHalf  *{
     z-index: 2;
     color: black;
-
   }
 
   #mainParent {
@@ -196,7 +195,7 @@
   }
   
   #firstHalf h2{
-    margin-bottom: 0vh;
+    margin-bottom: 20vh;
   }
 
 

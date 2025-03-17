@@ -5,7 +5,7 @@ function Divider() {
 
 
   return (
-    <div id={styles.Divider}>
+    <div id="divider" className={styles.Divider}>      
       <h1> Check out my progress ! </h1>
       <p>A personal web app where I track my workouts, progress, and goals. <br />Feel free to browse through my stats and see how things are going! </p>
     </div>

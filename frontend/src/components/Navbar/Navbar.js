@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
+import {Link} from 'react-router-dom'
+import { HashLink } from 'react-router-hash-link';
+
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  
+  
 
   // Function to toggle menu state
   const toggleMenu = () => {
@@ -22,18 +27,17 @@ function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      {/* Logo */}
+
       <div className={styles.logo}>
-        <a href="#">FrootNoot</a>
+        
+        <HashLink smooth to={"/#top"}> FrootNoot </HashLink>
       </div>
 
-      {/* Normal Navigation for Large Screens */}
       {!isMobile && (
         <ul className={styles.navMenu}>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experiences">Experience</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <HashLink smooth to={"/#divider"} className={styles.link}> <li>About</li> </HashLink>
+          <Link to={"/GuestDashboard"} className={styles.link}> <li>View</li> </Link>
+          <Link to={"/AdminDashboard"} className={styles.link}> <li>Login</li> </Link>
         </ul>
       )}
 
@@ -50,10 +54,9 @@ function Navbar() {
       {isMobile && (
         <div className={`${styles.navWrapper} ${isOpen ? styles.show : ""}`}>
           <ul>
-            <li><a href="#about" onClick={toggleMenu}>About</a></li>
-            <li><a href="#skills" onClick={toggleMenu}>Skills</a></li>
-            <li><a href="#experiences" onClick={toggleMenu}>Experience</a></li>
-            <li><a href="#contact" onClick={toggleMenu}>Contact</a></li>
+          <HashLink smooth to={"/#divider"} className={styles.link} onClick={toggleMenu}>  <li>About</li> </HashLink>
+          <Link to={"/GuestDashboard"} className={styles.link} onClick={toggleMenu}> <li>View</li> </Link>
+          <Link to={"/AdminDashboard"} className={styles.link} onClick={toggleMenu}> <li>Login</li> </Link>
           </ul>
         </div>
       )}
