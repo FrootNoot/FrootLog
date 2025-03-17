@@ -10,6 +10,29 @@
 
 }
 
+.quote{
+  position: absolute;
+  bottom: 10vh;
+  width: 30%;
+  letter-spacing: normal;
+  animation: fadeInOut 10s ease-in-out infinite;
+
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 .halfContainer{
   width: 50%;
   height: 100%;
@@ -24,6 +47,10 @@
   flex-direction: column;
   align-items: flex-start;
   padding-left: 10%;
+}
+
+#firstHalf h2{
+  margin-bottom: 20vh;
 }
 
 #firstHalf  *{
@@ -145,6 +172,12 @@
 }
 
 @media screen and (max-width: 1000px) {
+
+  .quote{
+    width: 70%;
+  }
+
+
   #firstHalf{
     background-color: #f9f1f1;
     border-right:none;
@@ -162,6 +195,9 @@
     align-items: flex-end;
   }
   
+  #firstHalf h2{
+    margin-bottom: 0vh;
+  }
 
 
   #secondHalf{
