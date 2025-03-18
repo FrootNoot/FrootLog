@@ -15,7 +15,7 @@ const AdminDashboard = () => {
     const tabContents = [
         <SummaryStats/>,
         <WorkoutForm />,
-        <WorkoutActivityGraph year={2025} />,
+        <WorkoutActivityGraph year={2025} admin={true}/>,
         <div><h2>Contact</h2><p>Reach out via our contact page.</p></div>
     ];
 

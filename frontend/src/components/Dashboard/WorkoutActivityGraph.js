@@ -45,7 +45,7 @@ const generateHeatmapData = (workoutData, year) => {
   return data;
 };
 
-const WorkoutActivityGraph = ({ year }) => {
+const WorkoutActivityGraph = ({ year, admin }) => {
   const [workoutData, setWorkoutData] = useState([]);
   const [activeWorkout, setActiveWorkout] = useState(null);
   const [width, setWidth] = useState(window.innerWidth);
@@ -166,7 +166,7 @@ const WorkoutActivityGraph = ({ year }) => {
     </div>
   ) : (
     <div>
-      <ExerciseDisplay exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
+      <ExerciseDisplay  admin={admin} exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
     </div>
   )}
 </div>

@@ -1,18 +1,22 @@
 import React from 'react';
 import WorkoutList from '../WorkoutList/WorkoutList';
 import DashboardTab from './DashboardTab';
+import SummaryStats from './SummaryStats';
+import WorkoutActivityGraph from './WorkoutActivityGraph';
+import MorphingBackground from './MorphingBackground'; 
 
 const GuestDashboard = () => {
   const tabNames = ['Overview', 'Features', 'Pricing', 'Contact'];
   const tabContents = [
-    <WorkoutList />,
-    <div><h2>Features</h2><p>Our tab component is fully responsive.</p></div>,
-    <div><h2>Pricing</h2><p>Completely free to use!</p></div>,
+    <SummaryStats/>,
+    <h1>stuff here</h1>,
+    <WorkoutActivityGraph year={2025} admin={false}/>,
     <div><h2>Contact</h2><p>Reach out via our contact page.</p></div>
   ];
 
   return (
     <div>
+      <MorphingBackground />
       <DashboardTab tabNames={tabNames} tabContents={tabContents} />
     </div>
   );

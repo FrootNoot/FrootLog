@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./ExerciseDisplay.module.css";
 import WorkoutItem from "../WorkoutList/WorkoutItem";
 
-const ExerciseDisplay = ({ exerciseID, bodyweight, date }) => {
+const ExerciseDisplay = ({ exerciseID, bodyweight, date , admin}) => {
 
   const workout = {
     id: exerciseID,
@@ -12,7 +12,7 @@ const ExerciseDisplay = ({ exerciseID, bodyweight, date }) => {
 
   return (
     <div>
-      <WorkoutItem workout={workout} />
+      <WorkoutItem workout={workout} admin={admin}/>
     </div>
   );
 };

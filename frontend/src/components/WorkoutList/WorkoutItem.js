@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import EditWorkoutModal from './EditWorkoutModal'; // Import modal component
 
-function WorkoutItem({ workout }) {
+function WorkoutItem({ workout, admin}) {
   const [exercises, setExercises] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
@@ -42,7 +42,7 @@ function WorkoutItem({ workout }) {
           <p>Weight: {exercise.weight}kg</p>
         </div>))
         }
-      <button className={buttonClass} onClick={() => setIsModalOpen(!isModalOpen)}>Edit Workout</button>
+      {admin && (<button className={buttonClass} onClick={() => setIsModalOpen(!isModalOpen)}>Edit Workout</button>)}
 
       {isModalOpen && (
         <EditWorkoutModal
