@@ -5,14 +5,19 @@ import dayjs from 'dayjs';
 
 import styles from './GoalSection.module.css';
 
-// Function to generate monthly ticks
-const generateMonthlyTicks = (startDate, endDate) => {
+// Function to generate monthly ticks and include the last date
+const generateMonthlyTicks = (startDate, endDate, lastDate) => {
     const ticks = [];
     let currentDate = dayjs(startDate);
 
     while (currentDate.isBefore(dayjs(endDate)) || currentDate.isSame(dayjs(endDate))) {
         ticks.push(currentDate.valueOf()); // Use timestamp for compatibility with `scale="time"`
         currentDate = currentDate.add(1, 'month'); // Increment to the next month
+    }
+
+    // Ensure the last date is included if necessary
+    if (!ticks.includes(dayjs(lastDate).valueOf())) {
+        ticks.push(dayjs(lastDate).valueOf());
     }
 
     return ticks;
@@ -24,6 +29,14 @@ const preprocessData = (data) => {
         ...entry,
         date: new Date(entry.date).getTime(), // Convert date to timestamp
     }));
+};
+
+// Custom tick formatter to avoid duplicate month labels
+const tickFormatter = (date, index, ticks) => {
+    const formattedDate = dayjs(date).format('MMM');
+    const prevDate = index > 0 ? dayjs(ticks[index - 1]).format('MMM') : null;
+
+    return formattedDate !== prevDate ? formattedDate : ''; // Prevent repetition
 };
 
 const GoalSection = () => {
@@ -42,7 +55,7 @@ const GoalSection = () => {
                 const startDate = processedData[0]?.date; // Earliest date
                 const endDate = processedData[processedData.length - 1]?.date; // Latest date
                 if (startDate && endDate) {
-                    setTicks(generateMonthlyTicks(startDate, endDate));
+                    setTicks(generateMonthlyTicks(startDate, endDate, endDate));
                 }
             })
             .catch(error => console.error("Error fetching bodyweight data:", error));
@@ -90,7 +103,7 @@ const GoalSection = () => {
                         type="number"
                         domain={['auto', 'auto']}
                         ticks={ticks}
-                        tickFormatter={(date) => dayjs(date).format('MMM')} // Display only month abbreviation
+                        tickFormatter={(date, index) => tickFormatter(date, index, ticks)} // Use the custom formatter
                     />
                     <YAxis />
                     <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
@@ -117,7 +130,7 @@ const GoalSection = () => {
                         type="number"
                         domain={['auto', 'auto']}
                         ticks={ticks} // Show every month
-                        tickFormatter={(date) => dayjs(date).format('MMM')} // Display only month abbreviation
+                        tickFormatter={(date, index) => tickFormatter(date, index, ticks)} // Use the custom formatter
                     />
                     <YAxis />
                     <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
