@@ -298,6 +298,7 @@ exports.getBenchStats = async (req, res) => {
       LEFT OUTER JOIN workout_exercises we on (e.id = we.exercise_id)
       LEFT OUTER JOIN workouts w on (we.workout_id = w.id)
       WHERE e.name LIKE 'Bench press'
+      order by w.date
       `);
     res.status(200).json(result.rows);
   } catch (err) {
@@ -311,6 +312,7 @@ exports.bodyweightHistory = async (req, res) => {
     const result = await db.query(`
       SELECT bodyweight, date
       FROM workouts
+      order by date
       `);
     res.status(200).json(result.rows);
   } catch (err) {

@@ -4,13 +4,14 @@ import SummaryStats from './SummaryStats';
 import WorkoutActivityGraph from './WorkoutActivityGraph';
 import MorphingBackground from './MorphingBackground'; 
 import Frequent from './Frequent';
+import GoalSection from './GoalSection';
 
 const GuestDashboard = () => {
 
   const tabNames = ['summary', 'Features', 'history', 'FAQ'];
   const tabContents = [
     <SummaryStats/>,
-    <h1>stuff here</h1>,
+    <GoalSection />,
     <WorkoutActivityGraph year={2025} admin={false}/>,
     <Frequent/>
   ];

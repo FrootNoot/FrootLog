@@ -6,7 +6,7 @@ import DashboardTab from './DashboardTab';
 import WorkoutActivityGraph from './WorkoutActivityGraph';
 import MorphingBackground from './MorphingBackground'; 
 import styles from './AdminDashboard.module.css';
-import Frequent from './Frequent';
+import GoalSection from './GoalSection';
 
 const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
@@ -17,7 +17,7 @@ const AdminDashboard = () => {
         <SummaryStats/>,
         <WorkoutForm />,
         <WorkoutActivityGraph year={2025} admin={true}/>,
-        <Frequent/>
+        <GoalSection />
     ];
 
     const handlePasswordSubmit = () => {
