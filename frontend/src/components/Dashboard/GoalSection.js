@@ -1,86 +1,131 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import dayjs from 'dayjs';
 
 import styles from './GoalSection.module.css';
 
-const GoalSection = () => {
+// Function to generate monthly ticks
+const generateMonthlyTicks = (startDate, endDate) => {
+    const ticks = [];
+    let currentDate = dayjs(startDate);
 
+    while (currentDate.isBefore(dayjs(endDate)) || currentDate.isSame(dayjs(endDate))) {
+        ticks.push(currentDate.valueOf()); // Use timestamp for compatibility with `scale="time"`
+        currentDate = currentDate.add(1, 'month'); // Increment to the next month
+    }
+
+    return ticks;
+};
+
+// Preprocess data to convert dates to timestamps
+const preprocessData = (data) => {
+    return data.map(entry => ({
+        ...entry,
+        date: new Date(entry.date).getTime(), // Convert date to timestamp
+    }));
+};
+
+const GoalSection = () => {
     const [bodyweightData, setBodyweightData] = useState([]);
     const [benchData, setBenchData] = useState([]);
     const [oneRepMaxResults, setOneRepMaxResults] = useState([]);
-
+    const [ticks, setTicks] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/exercises/bodyweight`)
-          .then(response => setBodyweightData(response.data))
-          .catch(error => console.error("Error fetching bodyweight data:", error));
-      }, []);
+        axios.get('http://localhost:5000/exercises/bodyweight')
+            .then(response => {
+                const processedData = preprocessData(response.data);
+                setBodyweightData(processedData);
 
-      useEffect(() => {
-        axios.get(`http://localhost:5000/exercises/bench`)
-          .then(response => setBenchData(response.data))
-          .catch(error => console.error("Error fetching bench data:", error));
-      }, []);
-    
+                // Generate monthly ticks based on the dataset range
+                const startDate = processedData[0]?.date; // Earliest date
+                const endDate = processedData[processedData.length - 1]?.date; // Latest date
+                if (startDate && endDate) {
+                    setTicks(generateMonthlyTicks(startDate, endDate));
+                }
+            })
+            .catch(error => console.error("Error fetching bodyweight data:", error));
+    }, []);
 
+    useEffect(() => {
+        axios.get('http://localhost:5000/exercises/bench')
+            .then(response => {
+                const processedData = preprocessData(response.data);
+                setBenchData(processedData);
+            })
+            .catch(error => console.error("Error fetching bench data:", error));
+    }, []);
+
+    // Calculate one-rep max estimates
     const formatOneRepMax = () => {
         const newForm = benchData.map(entry => {
-            const estimate = entry.weight / (1.0278 - 0.0278 * entry.reps[0]);
-            return { date: entry.date, estimate }; 
+            const estimate = entry.weight / (1.0278 - 0.0278 * entry.reps[0]); // Formula for one-rep max
+            return { date: entry.date, estimate };
         });
-        return newForm; 
+        return newForm;
     };
-    
 
     useEffect(() => {
-        setOneRepMaxResults(formatOneRepMax()); 
-        console.log(oneRepMaxResults); 
-        console.log(bodyweightData)
-    }, [benchData]); 
-    
-    
+        setOneRepMaxResults(formatOneRepMax());
+    }, [benchData]);
+
     return (
-        <div> 
+        <div>
+            {/* Bench One-Rep Max Chart */}
             <ResponsiveContainer width="100%" height={300}>
-            <LineChart
-                data={oneRepMaxResults}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="estimate" stroke="#8884d8" activeDot={{ r: 8 }} />
-            </LineChart>
+                <LineChart
+                    data={oneRepMaxResults}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                        dataKey="date"
+                        scale="time"
+                        type="number"
+                        domain={['auto', 'auto']}
+                        ticks={ticks}
+                        tickFormatter={(date) => dayjs(date).format('MMM')} // Display only month abbreviation
+                    />
+                    <YAxis />
+                    <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
+                    <Legend />
+                    <Line type="monotone" dataKey="estimate" stroke="#8884d8" activeDot={{ r: 8 }} />
+                </LineChart>
             </ResponsiveContainer>
 
+            {/* Bodyweight Chart */}
             <ResponsiveContainer width="100%" height={300}>
-            <LineChart
-                data={bodyweightData}
-                margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="date" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="bodyweight" stroke="#8884d8" activeDot={{ r: 8 }} />
-            </LineChart>
+                <LineChart
+                    data={bodyweightData}
+                    margin={{
+                        top: 5,
+                        right: 30,
+                        left: 20,
+                        bottom: 5,
+                    }}
+                >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis
+                        dataKey="date"
+                        scale="time"
+                        type="number"
+                        domain={['auto', 'auto']}
+                        ticks={ticks} // Show every month
+                        tickFormatter={(date) => dayjs(date).format('MMM')} // Display only month abbreviation
+                    />
+                    <YAxis />
+                    <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
+                    <Legend />
+                    <Line type="monotone" dataKey="bodyweight" stroke="#82ca9d" activeDot={{ r: 8 }} />
+                </LineChart>
             </ResponsiveContainer>
-
-            </div>
+        </div>
     );
 };
 

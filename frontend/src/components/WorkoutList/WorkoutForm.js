@@ -8,8 +8,12 @@ const WorkoutForm = () => {
     const [exercises, setExercises] = useState([{ name: '', weight: '', sets: '', reps: [] }]);
     const [suggestions, setSuggestions] = useState({}); // Store suggestions per row
 
-    const today = new Date().toISOString().split('T')[0];
-
+    let max = new Date();
+    const tomorrow = new Date(max);
+    tomorrow.setDate(max.getDate() + 1);
+    
+    max = tomorrow.toISOString().split('T')[0];
+    
     const handleAddExercise = () => {
         setExercises([...exercises, { name: '', weight: '', sets: '', reps: [] }]);
     };
@@ -88,9 +92,8 @@ const WorkoutForm = () => {
 
         try {
 
-            /*
+
             await axios.post('http://localhost:5000/exercises', workoutData);
-             */
             alert('Workout added successfully');
             setBodyWeight('');
             setDate('');
@@ -111,7 +114,7 @@ const WorkoutForm = () => {
                 </div>
             <div>
                 <label>Date:</label>
-                <input required type="date" value={date} onChange={(e) => setDate(e.target.value)} max={today} />
+                <input required type="date" value={date} onChange={(e) => setDate(e.target.value)} max={max} />
                 </div>
             </div>
 
