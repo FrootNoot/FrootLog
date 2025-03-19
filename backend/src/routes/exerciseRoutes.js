@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/', exerciseController.getExercisesByWorkout);
 router.get('/search', exerciseController.searchExercises);
+router.get('/bench', exerciseController.getBenchStats);
+router.get('/bodyweight', exerciseController.bodyweightHistory);
 router.get('/latest', exerciseController.getLatestWorkout);
 router.get('/workouts', exerciseController.getWorkouts);
 router.get('/yearlyWorkout', exerciseController.countYearlyWorkout);
