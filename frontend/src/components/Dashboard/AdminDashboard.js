@@ -6,17 +6,18 @@ import DashboardTab from './DashboardTab';
 import WorkoutActivityGraph from './WorkoutActivityGraph';
 import MorphingBackground from './MorphingBackground'; 
 import styles from './AdminDashboard.module.css';
+import Frequent from './Frequent';
 
 const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [enteredPassword, setEnteredPassword] = useState('');
 
-    const tabNames = ['summary', 'track', 'history', 'contact'];
+    const tabNames = ['summary', 'track', 'history', 'faq'];
     const tabContents = [
         <SummaryStats/>,
         <WorkoutForm />,
         <WorkoutActivityGraph year={2025} admin={true}/>,
-        <div><h2>Contact</h2><p>Reach out via our contact page.</p></div>
+        <Frequent/>
     ];
 
     const handlePasswordSubmit = () => {

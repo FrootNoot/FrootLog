@@ -1,0 +1,26 @@
+.faqContent{
+    display: flex;
+    color: white;
+    flex-direction: column;
+}
+
+.faqContent p {
+
+}
+
+.faqContent p:nth-of-type(2n){
+    padding-bottom: 20px;
+    border-bottom: 1px solid white;
+    font-size: 17px;
+}
+
+.faqContent p:nth-of-type(2n + 1){
+    padding-top: 20px;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.faqContent p:last-child{
+    border-bottom: none;
+}
