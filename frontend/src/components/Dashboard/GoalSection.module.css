@@ -1,0 +1,20 @@
+.goalsSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.goalsSection h1{
+    color: white;
+    font-size: 30px;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .goalsSection h1{
+        font-size: 20px;
+    }
+    
+  }

@@ -84,8 +84,9 @@ const GoalSection = () => {
     }, [benchData]);
 
     return (
-        <div>
+        <div className={styles.goalsSection}>
             {/* Bench One-Rep Max Chart */}
+            <h1> Bench Press Estimated One Rep Max</h1>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart
                     data={oneRepMaxResults}
@@ -113,6 +114,7 @@ const GoalSection = () => {
             </ResponsiveContainer>
 
             {/* Bodyweight Chart */}
+            <h1> BodyWeight Tracker</h1>
             <ResponsiveContainer width="100%" height={300}>
                 <LineChart
                     data={bodyweightData}

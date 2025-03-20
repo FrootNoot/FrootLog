@@ -8,7 +8,7 @@ import GoalSection from './GoalSection';
 
 const GuestDashboard = () => {
 
-  const tabNames = ['summary', 'Features', 'history', 'FAQ'];
+  const tabNames = ['summary', 'features', 'history', 'FAQ'];
   const tabContents = [
     <SummaryStats/>,
     <GoalSection />,

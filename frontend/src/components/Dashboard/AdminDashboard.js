@@ -12,7 +12,7 @@ const AdminDashboard = () => {
     const [isAdmin, setIsAdmin] = useState(false);
     const [enteredPassword, setEnteredPassword] = useState('');
 
-    const tabNames = ['summary', 'track', 'history', 'faq'];
+    const tabNames = ['summary', 'track', 'history', 'goals'];
     const tabContents = [
         <SummaryStats/>,
         <WorkoutForm />,
