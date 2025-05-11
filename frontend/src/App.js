@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HeroSection from './components/Home/HeroSection';
-import BodyButtons from './components/Home/BodyButtons';
+import Description from './components/Home/Description';
 import Footer from './components/Home/Footer'; 
 import Divider from './components/Home/Divider';
 
@@ -15,7 +15,7 @@ function App() {
       <Navbar></Navbar>
       <HeroSection></HeroSection>
       <Divider></Divider>
-      <BodyButtons></BodyButtons>
+      <Description></Description>
       <Footer></Footer>
 
     </div>
