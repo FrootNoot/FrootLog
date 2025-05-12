@@ -7,23 +7,25 @@ function Description() {
 
   return (
     <div className={styles.descriptionContainer}> 
+
+
       <div className={styles.descriptionItem}> 
-        <Dumbbell className={styles.icon} size={50} color="black" />
-        <h1>temp1</h1>
-        <h3>Breif desciprtion yadayada</h3>
+        <Dumbbell className={styles.icon}  color="black" />
+        <h1>View My Workouts</h1>
+        <h3>See what weights, sets and reps I do for my workouts.</h3>
       </div>
+
+
       <div className={styles.descriptionItem}> 
-        <Goal className={styles.icon} size={50} color="black" />
-
-        <h1>temp2</h1>
-        <h3>Breif desciprtion yadayada</h3>
-
+        <Goal className={styles.icon}  color="black" />
+        <h1>Track My Goals</h1>
+        <h3>Check my progress towards my goals and see how they are coming along !</h3>
       </div>
+      
       <div className={styles.descriptionItem}> 
-        <NotebookTabs  className={styles.icon} size={50} color="black" />
-
-        <h1>temp3</h1>
-        <h3>Breif desciprtion yadayada</h3>
+        <NotebookTabs  className={styles.icon}  color="black" />
+        <h1>My Workout Log</h1>
+        <h3>A logbook for myself to record everything I need to stay consistent.</h3>
 
       </div>
     </div>
