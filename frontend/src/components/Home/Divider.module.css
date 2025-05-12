@@ -11,6 +11,7 @@
   border-bottom: 2px solid white;
   gap: 50px;
   text-align: center;
+  z-index: 2;
 }
 
 .Divider p{

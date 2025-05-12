@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
+import {Link} from 'react-router-dom'
+import { ChevronsRight } from 'lucide-react';
 
 function HeroSection() {
   const gymQuotes = [
@@ -38,6 +40,12 @@ function HeroSection() {
       <div id={styles.firstHalf} className={styles.halfContainer}>
         <h1>frootnoot.fit</h1>
         <h2>my personal gym tracker</h2>
+        <Link to={"/GuestDashboard"} className={styles.ctaLink}>
+          <span className={styles.ctaContent}>
+            View Progress <ChevronsRight size={20} />
+          </span>
+        </Link>
+
         <h3 className={styles.quote}>{currentQuote}</h3>
       </div>
 
