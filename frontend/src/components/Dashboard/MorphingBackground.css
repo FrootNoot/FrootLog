@@ -1,18 +1,25 @@
 .morphing-bg {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    z-index: -1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1000;
+
+  background: #221E1E;
+  background: linear-gradient(239deg, rgba(34, 30, 30, 1) 31%, rgba(51, 51, 51, 1) 63%);
 }
 
-.fullscreen-svg {
-    width: 100vw;
-    height: 100vh;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
+.wavyText {
+  display: block;
+  margin: 0 auto;
+  width: 100%; 
+}
+
+@media (max-width: 769px), (max-height: 400px) {
+#wavyText {
+    display: none;
+    font-size: large;
+  }
 }
