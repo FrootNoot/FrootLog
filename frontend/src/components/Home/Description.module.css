@@ -1,67 +1,86 @@
-.descriptionContainer{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: #f9f1f1;
+.descriptionContainer {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f9f1f1;
 }
 
-.descriptionItem{
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    width: 33.33%;
-    border-left: 5px solid #fff;
-    padding-top: 20px;
-    gap:20px;
-    padding-left: 20px;
-    padding-right: 20px;
+.descriptionItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 33.33%;
+  border-left: 5px solid #fff;
+  padding-top: 20px;
+  gap: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  transition: all 0.3s ease; 
+  cursor: pointer;  
+  text-decoration: none;  
 }
 
-.descriptionItem h3{
-    text-align: center;
+.descriptionItem:hover {
+  background-color: #444;  
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);   
 }
 
-.descriptionItem h1{
-    font-size: clamp(1.5rem, 2.5vw, 2rem);
+.descriptionItem h3 {
+  text-align: center;
+  color: #000;
 }
 
-.icon{
+.descriptionItem h1 {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  color: #000;
+}
+
+.descriptionItem:hover h1, .descriptionItem:hover h3 {
+  color: #fff;
+}
+
+.descriptionItem .icon {
+  color: #000; 
+}
+
+.descriptionItem:hover .icon {
+  color: #fff; 
+}
+
+.icon {
   width: 10vw;
   height: 10vw;
   min-width: 45px;
   min-height: 45px;
 }
 
-
 @media screen and (max-width: 1000px) {
-    .descriptionContainer{
-        flex-direction: column;
-    }
+  .descriptionContainer {
+    flex-direction: column;
+  }
 
-    .descriptionItem{
-        width: 100%;
-        border-left: none;
-        border-top: 5px solid #fff;
-        flex-direction: row;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
+  .descriptionItem {
+    width: 100%;
+    border-left: none;
+    border-top: 5px solid #fff;
+    flex-direction: row;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
 
-    .icon{
-        flex-basis: 1;
-        float: left;
-    }
+  .icon {
+    flex-basis: 1;
+    float: left;
+  }
 
-    .descriptionItem h1{
-        font-size: clamp(1.5rem, 5vw, 2rem);
-    }
+  .descriptionItem h1 {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
 }
 
-
 @media screen and (max-width: 700px) {
-
-    .descriptionItem{
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
+  .descriptionItem {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
