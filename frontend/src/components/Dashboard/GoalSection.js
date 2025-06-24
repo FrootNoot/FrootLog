@@ -74,7 +74,8 @@ const GoalSection = () => {
     const formatOneRepMax = () => {
         const newForm = benchData.map(entry => {
             const estimate = entry.weight / (1.0278 - 0.0278 * entry.reps[0]); // Formula for one-rep max
-            return { date: entry.date, estimate };
+
+            return { date: entry.date, estimate: estimate.toFixed(2) };
         });
         return newForm;
     };

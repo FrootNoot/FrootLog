@@ -282,7 +282,7 @@ exports.getBenchStats = async (req, res) => {
       SELECT w.id, e.name, we.reps, we.weight, w.date from exercises e
       LEFT OUTER JOIN workout_exercises we on (e.id = we.exercise_id)
       LEFT OUTER JOIN workouts w on (we.workout_id = w.id)
-      WHERE e.name LIKE 'Bench press'
+      WHERE e.name LIKE 'Bench Press'
       `);
     res.status(200).json(result.rows);
   } catch (err) {
@@ -291,21 +291,6 @@ exports.getBenchStats = async (req, res) => {
   }
 };
 
-exports.getBenchStats = async (req, res) => {
-  try {
-    const result = await db.query(`
-      SELECT w.id, we.reps, we.weight, w.date from exercises e
-      LEFT OUTER JOIN workout_exercises we on (e.id = we.exercise_id)
-      LEFT OUTER JOIN workouts w on (we.workout_id = w.id)
-      WHERE e.name LIKE 'Bench press'
-      order by w.date
-      `);
-    res.status(200).json(result.rows);
-  } catch (err) {
-    console.error('Error bench stats:', err.stack);
-    res.status(500).json({ error: 'Failed to fetch bench stats' });
-  }
-};
 
 exports.bodyweightHistory = async (req, res) => {
   try {

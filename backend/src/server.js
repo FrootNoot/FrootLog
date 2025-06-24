@@ -11,6 +11,7 @@ app.use(express.json());
 
 const db = new Pool({
   connectionString: process.env.DATABASE_URL,
+  
 });
 
 const exerciseRoutes = require('./routes/exerciseRoutes');
