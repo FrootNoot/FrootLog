@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import SummaryStats from './SummaryStats';
 import WorkoutForm from '../WorkoutList/WorkoutForm';
 import DashboardTab from './DashboardTab';
