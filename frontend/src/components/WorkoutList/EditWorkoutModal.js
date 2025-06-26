@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import API from "../../api";
+
 import styles from "./EditWorkoutModal.module.css";
 
 const EditWorkoutModal = ({ workout, exercises, onClose}) => {
@@ -48,11 +49,11 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
 
 
     try {
-      await axios.put(`http://localhost:5000/exercises/updateworkout/${workout.id}`, workoutData);
-      
+      await API.put(`/exercises/updateworkout/${workout.id}`, workoutData);
+
       await Promise.all(
         exerciseData.map((exercise) =>
-          axios.put(`http://localhost:5000/exercises/updateExercise/${exercise.workoutexerciseid}`, exercise)
+          API.put(`/exercises/updateExercise/${exercise.workoutexerciseid}`, exercise)
         )
       );
 
@@ -67,7 +68,7 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
     if (!window.confirm("Are you sure you want to delete this workout?")) return;
 
     try {
-      await axios.delete(`http://localhost:5000/exercises/deleteWorkout/${workout.id}`);
+      await API.delete(`/exercises/deleteWorkout/${workout.id}`);
       onClose();
     } catch (error) {
       console.error("Failed to delete workout:", error);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ScatterChart, Scatter, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
-import axios from "axios";
+import API from "../../api";
 import styles from './WorkoutActivityGraph.module.css';
 import ExerciseDisplay from "./ExerciseDisplay";
 
@@ -58,7 +58,7 @@ const WorkoutActivityGraph = ({ year, admin }) => {
   
   const handleClick = (payload) => {
     if (payload.count > 0) {
-        axios.get(`http://localhost:5000/exercises/workoutByDate?date=${payload.date}`)
+        API.get(`/exercises/workoutByDate?date=${payload.date}`)
           .then(response => setActiveWorkout(response.data[0]))
           .catch(error => console.error("Error fetching workout data:", error));
     }
@@ -75,7 +75,7 @@ const WorkoutActivityGraph = ({ year, admin }) => {
 
   
   useEffect(() => {
-    axios.get(`http://localhost:5000/exercises/workoutHistory?year=${year}`)
+    API.get(`/exercises/workoutHistory?year=${year}`)
       .then(response => setWorkoutData(response.data))
       .catch(error => console.error("Error fetching workout data:", error));
   }, [year]);

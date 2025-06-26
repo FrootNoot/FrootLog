@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../../api';
 import styles from './SummaryStats.module.css';
 
 const SummaryStats = () => {
@@ -10,7 +10,7 @@ const SummaryStats = () => {
     const [yearlyWorkoutCount, setYearlyWorkoutCount] = useState(null);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/exercises/latest')
+        API.get('/exercises/latest')
             .then(response => {
                 setLatestWorkout(response.data);
             })
@@ -18,7 +18,7 @@ const SummaryStats = () => {
                 console.error('Error fetching latest workout:', error);
             });
 
-        axios.get('http://localhost:5000/exercises/countworkouts')
+        API.get('/exercises/countworkouts')
             .then(response => {
                 setWorkoutCountWeek(response.data);
             })
@@ -26,7 +26,7 @@ const SummaryStats = () => {
                 console.error('Error fetching workout count for the week:', error);
             });
 
-        axios.get('http://localhost:5000/exercises/frequentexercise')
+        API.get('/exercises/frequentexercise')
             .then(response => {
                 setMostFrequentExercise(response.data);
             })
@@ -34,7 +34,7 @@ const SummaryStats = () => {
                 console.error('Error fetching most frequent exercise:', error);
             });
 
-        axios.get('http://localhost:5000/exercises/yearlyWorkout', { params: { year: new Date().getFullYear() } })
+        API.get('/exercises/yearlyWorkout', { params: { year: new Date().getFullYear() } })
             .then(response => {
                 setYearlyWorkoutCount(response.data);
             })
@@ -46,7 +46,7 @@ const SummaryStats = () => {
 
     useEffect(() => {
         if (latestWorkout && latestWorkout.length > 0) {
-            axios.get(`http://localhost:5000/exercises/?workout_id=${latestWorkout[0].id}`)
+            API.get(`/exercises/?workout_id=${latestWorkout[0].id}`)
                 .then(response => {
                     setLatestExercises(response.data);
                 })

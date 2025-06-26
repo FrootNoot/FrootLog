@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import axios from 'axios';
+import API from '../../api';
 import styles from './WorkoutForm.module.css';
 
 const WorkoutForm = () => {
@@ -40,7 +40,7 @@ const WorkoutForm = () => {
     
                 if (value.trim()) {
                     try {
-                        const response = await axios.get('http://localhost:5000/exercises/search', {
+                        const response = await API.get('/exercises/search', {
                             params: { query: value },
                         });
                         setSuggestions((prev) => ({ ...prev, [index]: response.data }));
@@ -93,7 +93,7 @@ const WorkoutForm = () => {
         try {
 
 
-            await axios.post('http://localhost:5000/exercises', workoutData);
+            await API.post('/exercises', workoutData);
             alert('Workout added successfully');
             setBodyWeight('');
             setDate('');

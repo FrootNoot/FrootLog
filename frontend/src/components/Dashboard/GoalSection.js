@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import API from '../../api';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import dayjs from 'dayjs';
 
@@ -46,7 +46,7 @@ const GoalSection = () => {
     const [ticks, setTicks] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/exercises/bodyweight')
+        API.get('/exercises/bodyweight')
             .then(response => {
                 const processedData = preprocessData(response.data);
                 setBodyweightData(processedData);
@@ -62,7 +62,7 @@ const GoalSection = () => {
     }, []);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/exercises/bench')
+        API.get('/exercises/bench')
             .then(response => {
                 const processedData = preprocessData(response.data);
                 setBenchData(processedData);

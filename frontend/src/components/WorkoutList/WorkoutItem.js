@@ -1,6 +1,6 @@
 import styles from './WorkoutItem.module.css';
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
+import API from '../../api';
 import EditWorkoutModal from './EditWorkoutModal'; // Import modal component
 
 function WorkoutItem({ workout, admin}) {
@@ -10,7 +10,7 @@ function WorkoutItem({ workout, admin}) {
   const fetchExercises = useCallback(async () => {
     try {
       console.log(`Fetching exercises for workout ID: ${workout.id}`);
-      const response = await axios.get(`http://localhost:5000/exercises/`, {
+      const response = await API.get(`/exercises/`, {
         params: { workout_id: workout.id }
       });
       setExercises(response.data);
