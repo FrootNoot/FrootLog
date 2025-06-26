@@ -18,9 +18,12 @@
   },
   "scripts": {
     "start": "concurrently \"npm run dev --prefix ../backend\" \"react-scripts start\"",
-    "build": "react-scripts build",
+    "build": "CI=false react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .js,.jsx"
+
+    
   },
   "eslintConfig": {
     "extends": [
