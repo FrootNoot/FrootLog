@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom'; // Add this import to read the URL
 
 import styles from './DashboardTab.module.css';

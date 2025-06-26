@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
 import {Link} from 'react-router-dom'
 import { ChevronsRight } from 'lucide-react';

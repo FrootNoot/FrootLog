@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import API from "../../api";
 
 import styles from "./EditWorkoutModal.module.css";

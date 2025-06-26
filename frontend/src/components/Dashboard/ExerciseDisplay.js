@@ -1,5 +1,3 @@
-import React from "react";
-import styles from "./ExerciseDisplay.module.css";
 import WorkoutItem from "../WorkoutList/WorkoutItem";
 
 const ExerciseDisplay = ({ exerciseID, bodyweight, date , admin}) => {

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import HeroSection from './components/Home/HeroSection';
 import Description from './components/Home/Description';
 import Footer from './components/Home/Footer'; 
