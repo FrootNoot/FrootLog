@@ -70,15 +70,16 @@ const GoalSection = () => {
             .catch(error => console.error("Error fetching bench data:", error));
     }, []);
 
-    // Calculate one-rep max estimates
     const formatOneRepMax = () => {
         const newForm = benchData.map(entry => {
-            const estimate = entry.weight / (1.0278 - 0.0278 * entry.reps[0]); // Formula for one-rep max
+            const estimate = entry.weight / (1.0278 - 0.0278 * entry.reps[0]);
 
             return { date: entry.date, estimate: estimate.toFixed(2) };
         });
-        return newForm;
+
+        return newForm.sort((a, b) => a.date - b.date);
     };
+
 
     useEffect(() => {
         setOneRepMaxResults(formatOneRepMax());
@@ -110,7 +111,7 @@ const GoalSection = () => {
                     <YAxis />
                     <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
                     <Legend />
-                    <Line type="monotone" dataKey="estimate" stroke="#8884d8" activeDot={{ r: 8 }} />
+                    <Line type="linear" dataKey="estimate" stroke="#8884d8" activeDot={{ r: 8 }} />
                 </LineChart>
             </ResponsiveContainer>
 
@@ -138,7 +139,7 @@ const GoalSection = () => {
                     <YAxis />
                     <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
                     <Legend />
-                    <Line type="monotone" dataKey="bodyweight" stroke="#82ca9d" activeDot={{ r: 8 }} />
+                    <Line type="linear" dataKey="bodyweight" stroke="#82ca9d" activeDot={{ r: 8 }} />
                 </LineChart>
             </ResponsiveContainer>
         </div>
