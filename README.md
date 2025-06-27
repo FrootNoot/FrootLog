@@ -31,10 +31,6 @@ A web app I created to help me track my workouts, provide insights and to let pe
 
 To get a local copy up and running follow these simple example steps.
 
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-
 ### Installation
 
 1. Clone the repo
