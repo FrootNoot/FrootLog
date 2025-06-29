@@ -183,4 +183,10 @@ input[type=number] {
 
 }
 
+@media screen and (max-width: 720px) {
+.exerciseForm > button{ 
+    font-size: 15px;
+}
+
+}
 

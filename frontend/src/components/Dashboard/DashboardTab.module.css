@@ -62,7 +62,7 @@
     background-color: #221E1E;
     border: 1px solid white;
 
-    min-width: max(420px, 50vw);
+    min-width: max(320px, 50vw);
     width: 50vw;
     /* maybe do a max(for width)*/
     max-height: 75vh;
