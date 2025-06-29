@@ -61,6 +61,7 @@ To get a local copy up and running follow these simple example steps.
 <!-- ROADMAP -->
 ## To add list
 
+- [ ] Proper Authentication 
 - [ ] Mobile friendly design
 - [ ] Performance enhancements
 - [ ] Kg, Lbs, Level for weight measurements
