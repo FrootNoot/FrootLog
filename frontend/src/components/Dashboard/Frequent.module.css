@@ -24,3 +24,25 @@
 .faqContent p:last-child{
     border-bottom: none;
 }
+
+@media (max-width: 1000px) {
+    .faqContent p:nth-of-type(2n) {
+        font-size: 15px;
+    }
+
+    .faqContent p:nth-of-type(2n + 1) {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .faqContent p:nth-of-type(2n) {
+        font-size: 14px;
+    }
+
+    .faqContent p:nth-of-type(2n + 1) {
+        font-size: 20px;
+    }
+
+
+}
