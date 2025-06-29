@@ -19,3 +19,11 @@
   line-height: 1.5; /* Increases space between lines */
   font-size: 1.2rem;
 }
+
+@media (max-width: 330px) {
+  .Divider {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    height: 50vh;
+  }
+}

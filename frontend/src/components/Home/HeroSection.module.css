@@ -9,6 +9,7 @@
   letter-spacing: 4px;
   overflow-x: hidden;
   position: relative;
+  overflow-y: hidden;
 
 }
 
