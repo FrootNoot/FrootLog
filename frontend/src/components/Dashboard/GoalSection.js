@@ -139,7 +139,7 @@ const GoalSection = () => {
                     <YAxis />
                     <Tooltip labelFormatter={(date) => dayjs(date).format('MMM DD, YYYY')} />
                     <Legend />
-                    <Line type="linear" dataKey="bodyweight" stroke="#82ca9d" activeDot={{ r: 8 }} />
+                    <Line type="linear" dataKey="bodyweight" stroke="#bb4b4bff" activeDot={{ r: 8 }} />
                 </LineChart>
             </ResponsiveContainer>
         </div>
