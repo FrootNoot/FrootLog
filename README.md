@@ -41,6 +41,7 @@ To get a local copy up and running follow these simple example steps.
    ```js
    DATABASE_URL=your_supabase_postgres_url
    PORT=5000
+   ADMIN_PASSWORD=whateverpasswordh
    ```
 3. Run backend with
    ```sh
