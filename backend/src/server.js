@@ -15,8 +15,11 @@ const db = new Pool({
 });
 
 const exerciseRoutes = require('./routes/exerciseRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 app.use('/exercises', exerciseRoutes);
+app.use('/auth', authRoutes); 
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
