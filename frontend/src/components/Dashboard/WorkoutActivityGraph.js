@@ -7,12 +7,8 @@ import ExerciseDisplay from "./ExerciseDisplay";
 // Function to check leap year
 const isLeapYear = (year) => (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 
-
-
-
 // Function to generate full-year heatmap data
 const generateHeatmapData = (workoutData, year) => {
-
   const daysInYear = isLeapYear(year) ? 366 : 365;
   const startDate = new Date(`${year}-01-01`);
   
@@ -45,8 +41,24 @@ const generateHeatmapData = (workoutData, year) => {
   return data;
 };
 
+// Utility function to get/set cache with expiration
+const getCachedData = (key, ttl = 5 * 60 * 1000) => {
+  const cached = localStorage.getItem(key);
+  if (cached) {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < ttl) {
+      return data;
+    }
+  }
+  return null;
+};
+
+const setCachedData = (key, data) => {
+  localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+};
+
 const WorkoutActivityGraph = ({ year, admin }) => {
-  const [workoutData, setWorkoutData] = useState([]);
+  const [workoutData, setWorkoutData] = useState(getCachedData(`workoutHistory_${year}`) || []);
   const [activeWorkout, setActiveWorkout] = useState(null);
   const [width, setWidth] = useState(window.innerWidth);
 
@@ -55,14 +67,26 @@ const WorkoutActivityGraph = ({ year, admin }) => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  
+
+  useEffect(() => {
+    if (workoutData.length === 0) {
+      API.get(`/exercises/workoutHistory?year=${year}`)
+        .then(response => {
+          setWorkoutData(response.data);
+          setCachedData(`workoutHistory_${year}`, response.data);
+        })
+        .catch(error => console.error("Error fetching workout data:", error));
+    }
+  }, [year, workoutData.length]);
+
   const handleClick = (payload) => {
     if (payload.count > 0) {
-        API.get(`/exercises/workoutByDate?date=${payload.date}`)
-          .then(response => setActiveWorkout(response.data[0]))
-          .catch(error => console.error("Error fetching workout data:", error));
+      API.get(`/exercises/workoutByDate?date=${payload.date}`)
+        .then(response => setActiveWorkout(response.data[0]))
+        .catch(error => console.error("Error fetching workout data:", error));
     }
   };
+
   const minWidth = 1600;
   const minSize = 10;  
   const maxSize = 16; 
@@ -71,14 +95,6 @@ const WorkoutActivityGraph = ({ year, admin }) => {
   const rectSize = width >= minWidth 
     ? Math.min(minSize + growthFactor * (width - minWidth), maxSize) 
     : minSize;
-
-
-  
-  useEffect(() => {
-    API.get(`/exercises/workoutHistory?year=${year}`)
-      .then(response => setWorkoutData(response.data))
-      .catch(error => console.error("Error fetching workout data:", error));
-  }, [year]);
 
   const heatmapData = generateHeatmapData(workoutData, year);
   const getMonthStartWeeks = () => {
@@ -98,81 +114,75 @@ const WorkoutActivityGraph = ({ year, admin }) => {
   };
 
   const monthStartWeeks = getMonthStartWeeks();
-  
 
   return (
     <div>
+      <ResponsiveContainer className={styles.chartBackground} aspect={4} width="100%" minWidth={750} minHeight={220}>
+        <ScatterChart>
+          <XAxis
+            className={styles.move}
+            type="number"
+            stroke="#ffffff"
+            dataKey="x"
+            name="Week"
+            dy={10}
+            dx={30}
+            axisLine={false}
+            domain={[0, 53]} 
+            ticks={monthStartWeeks} 
+            tickFormatter={(value) => {
+              const months = [
+                'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+              ];
+              const monthIndex = monthStartWeeks.indexOf(value);
+              return monthIndex !== -1 ? months[monthIndex] : '';
+            }}
+          />
+          <YAxis
+            className={styles.move2}
+            type="number"
+            dataKey="y"
+            stroke="#ffffff"
+            name="Day"
+            axisLine={false}
+            ticks={[1,3,5]}
+            domain={[0, 6]}
+            tickFormatter={(value) => {
+              const daysOfWeek = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
+              return daysOfWeek[value];
+            }}
+          />
+          <Scatter
+            data={heatmapData}
+            fill="#8884d8"
+            shape={({ cx, cy, payload }) => (
+              <rect
+                x={cx - 5}
+                y={cy - 5}
+                width={rectSize}
+                height={rectSize}
+                fill={payload.count > 0 ? `rgba(119, 255, 98, 0.8)` : "#eee"}
+                rx={2}
+                onClick={() => handleClick(payload)}
+                style={{ cursor: payload.count > 0 ? 'pointer' : 'default' }}
+              />
+            )}
+          />
+        </ScatterChart>
+      </ResponsiveContainer>
 
-    <ResponsiveContainer className={styles.chartBackground} aspect={4} width="100%"  minWidth={750} minHeight={220}> {/* Added margin for left padding */}
-      <ScatterChart>
-        <XAxis className={styles.move}
-          type="number"
-          stroke="#ffffff"
-          dataKey="x"
-          name="Week"
-          dy={10}
-          dx={30}
-          axisLine={false}
-          domain={[0, 53]} 
-          ticks={monthStartWeeks} 
-          tickFormatter={(value) => {
-            const months = [
-              'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
-              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-            ];
-            const monthIndex = monthStartWeeks.indexOf(value);
-            return monthIndex !== -1 ? months[monthIndex] : '';
-          }}
-        />
-        <YAxis
-          className={styles.move2}
-          type="number"
-          dataKey="y"
-          stroke="#ffffff"
-          name="Day"
-
-          axisLine={false}
-          ticks={[1,3,5]}
-          domain={[0, 6]}
-          tickFormatter={(value) => {
-            const daysOfWeek = ['', 'Mon', '', 'Wed', '', 'Fri', ''];
-            return daysOfWeek[value];
-          }}
-        />
-        <Scatter
-          data={heatmapData}
-          fill="#8884d8"
-          shape={({ cx, cy, payload }) => (
-            
-            <rect
-              x={cx - 5}
-              y={cy - 5}
-              width={rectSize}
-              height={rectSize}
-              fill={payload.count > 0 ? `rgba(119, 255, 98, 0.8)` : "#eee"}
-              rx={2}
-              onClick={() => handleClick(payload)}
-              style={{ cursor: payload.count > 0 ? 'pointer' : 'default' }}
-            />
-          )}
-        />
-      </ScatterChart>
-    </ResponsiveContainer>
-
-    <div>
-  {!activeWorkout ? (
-    <div id={styles.hint}>
-      "Click on a workout to view details"
-    </div>
-  ) : (
-    <div>
-      <ExerciseDisplay  admin={admin} exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
-    </div>
-  )}
-</div>
-
-
-
+      <div>
+        {!activeWorkout ? (
+          <div id={styles.hint}>
+            "Click on a workout to view details"
+          </div>
+        ) : (
+          <div>
+            <ExerciseDisplay admin={admin} exerciseID={activeWorkout.id} bodyweight={activeWorkout.bodyweight} date={activeWorkout.date} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

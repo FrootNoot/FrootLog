@@ -1,9 +1,8 @@
 import { useState } from "react";
 import API from "../../api";
-
 import styles from "./EditWorkoutModal.module.css";
 
-const EditWorkoutModal = ({ workout, exercises, onClose}) => {
+const EditWorkoutModal = ({ workout, exercises, onClose }) => {
   const today = new Date().toISOString().split('T')[0];
 
   const [workoutData, setWorkoutData] = useState({
@@ -25,28 +24,41 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
     setExerciseData(updatedExercises);
   };
 
+  // Clear relevant cache entries
+  const clearCaches = (year) => {
+    const cacheKeys = [
+      'latestWorkout',
+      'latestExercises',
+      'workoutCountWeek',
+      'mostFrequentExercise',
+      'yearlyWorkoutCount',
+      `workoutHistory_${year}`,
+      'bodyweightData',
+      'benchData'
+    ];
+    cacheKeys.forEach(key => localStorage.removeItem(key));
+  };
+
   // Submit workout update
   const handleWorkoutUpdate = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const validationErrors = [];
-
 
     exerciseData.forEach((exercise, index) => {
       const sets = Number(exercise.sets);
       const reps = exercise.reps.length;
 
       if (sets && reps && sets !== reps) {
-          validationErrors.push(
-              `The number of reps (${reps}) does not match the number of sets (${sets}) for exercise: ${exercise.name}.`
-          );
+        validationErrors.push(
+          `The number of reps (${reps}) does not match the number of sets (${sets}) for exercise: ${exercise.name}.`
+        );
       }
     });
 
     if (validationErrors.length > 0) {
-      alert(validationErrors.join('\n')); 
+      alert(validationErrors.join('\n'));
       return;
-  }
-
+    }
 
     try {
       await API.put(`/exercises/updateworkout/${workout.id}`, workoutData);
@@ -56,6 +68,10 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
           API.put(`/exercises/updateExercise/${exercise.workoutexerciseid}`, exercise)
         )
       );
+
+      // Clear caches for the affected year
+      const year = new Date(workoutData.date).getFullYear();
+      clearCaches(year);
 
       onClose();
     } catch (error) {
@@ -69,6 +85,11 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
 
     try {
       await API.delete(`/exercises/deleteWorkout/${workout.id}`);
+
+      // Clear caches for the affected year
+      const year = new Date(workoutData.date).getFullYear();
+      clearCaches(year);
+
       onClose();
     } catch (error) {
       console.error("Failed to delete workout:", error);
@@ -81,14 +102,15 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
 
       <div className={styles.inputRow}>
         <div>
-          <label >Bodyweight:</label>
+          <label>Bodyweight:</label>
           <input
-          id={styles.bodyWeightIn}
+            id={styles.bodyWeightIn}
             type="number"
             name="bodyweight"
             value={workoutData.bodyweight}
             onChange={handleWorkoutChange}
-            min="1" max="999"
+            min="1"
+            max="999"
             step=".01"
             required
           />
@@ -110,40 +132,40 @@ const EditWorkoutModal = ({ workout, exercises, onClose}) => {
       {exerciseData.map((exercise, index) => (
         <div className={styles.exerciseRow} key={exercise.id}>
           <p>{exercise.name}</p>
-          <div> 
-          <label>Weight (kg):</label>
-          <input
-            type="number"
-            value={exercise.weight}
-            onChange={(e) => handleExerciseChange(index, "weight", e.target.value)}
-            min="1"
-            max="999"
-            step=".01"
-            required
-          />
+          <div>
+            <label>Weight (kg):</label>
+            <input
+              type="number"
+              value={exercise.weight}
+              onChange={(e) => handleExerciseChange(index, "weight", e.target.value)}
+              min="1"
+              max="999"
+              step=".01"
+              required
+            />
           </div>
           <div>
-          <label>Sets:</label>
-          <input
-            type="number"
-            value={exercise.sets}
-            onChange={(e) => handleExerciseChange(index, "sets", e.target.value)}
-            min="1"
-            max="999"
-          />
+            <label>Sets:</label>
+            <input
+              type="number"
+              value={exercise.sets}
+              onChange={(e) => handleExerciseChange(index, "sets", e.target.value)}
+              min="1"
+              max="999"
+            />
           </div>
           <div>
-          <label>Reps:</label>
-          <input
-            type="text"
-            value={exercise.reps.join(",")}
-            onChange={(e) =>
-              handleExerciseChange(index, "reps", e.target.value.split(","))
-            }
-            pattern="^(\d+)(,\d+)*$"
-            required
-            title="Reps must match sets and be comma-seperated e.g. (7,7,8)"
-          />
+            <label>Reps:</label>
+            <input
+              type="text"
+              value={exercise.reps.join(",")}
+              onChange={(e) =>
+                handleExerciseChange(index, "reps", e.target.value.split(","))
+              }
+              pattern="^(\d+)(,\d+)*$"
+              required
+              title="Reps must match sets and be comma-separated e.g. (7,7,8)"
+            />
           </div>
         </div>
       ))}
